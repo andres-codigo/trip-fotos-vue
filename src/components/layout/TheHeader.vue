@@ -1,14 +1,20 @@
 <template>
-	<header class="header" data-cy="nav-header">
+	<header class="header" data-cy="nav-header-container">
 		<nav class="navbar">
-			<h1 class="nav-header">
+			<h1 class="nav-header-title-link" data-cy="nav-header-title-link">
 				<router-link to="/">Trip Fotos</router-link>
 			</h1>
-			<ul v-show="open" v-click-outside="closeDropdown" class="nav-menu">
-				<li class="nav-item">
+			<ul
+				v-show="open"
+				v-click-outside="closeDropdown"
+				class="nav-menu-items-container"
+				data-cy="nav-menu-items-container">
+				<li class="nav-menu-item">
 					<ul>
 						<li
 							v-if="isLoggedIn && isTraveller"
+							class="nav-menu-item-messages"
+							data-cy="nav-menu-item-messages"
 							@click.prevent="toggleHamburgerMenuActiveClass()">
 							<router-link to="/messages" class="nav-link"
 								>Messages
@@ -23,6 +29,8 @@
 						</li>
 						<li
 							v-if="isLoggedIn"
+							class="nav-menu-item-all-travellers"
+							data-cy="nav-menu-item-all-travellers"
 							@click.prevent="toggleHamburgerMenuActiveClass()">
 							<router-link to="/trips" class="nav-link"
 								>All Travellers</router-link
@@ -32,7 +40,8 @@
 				</li>
 				<!-- <li
 					v-if="!isLoggedIn"
-					class="nav-item"
+					class="nav-menu-item nav-menu-item-login"
+					data-cy="nav-menu-item-login"
 					@click.prevent="toggleHamburgerMenuActiveClass()"
 				>
 					<router-link
@@ -42,7 +51,10 @@
 						>Login</router-link
 					>
 				</li> -->
-				<li v-if="isLoggedIn" class="nav-item">
+				<li
+					v-if="isLoggedIn"
+					class="nav-menu-item nav-menu-item-logout"
+					data-cy="nav-menu-item-logout">
 					<base-button @click="logout"
 						>Logout {{ travellerName }}</base-button
 					>
@@ -108,7 +120,9 @@ export default {
 		toggleHamburgerMenuActiveClass() {
 			if (document.documentElement.clientWidth <= 768) {
 				const hamburger = document.querySelector('.hamburger')
-				const navMenu = document.querySelector('.nav-menu')
+				const navMenu = document.querySelector(
+					'.nav-menu-items-container',
+				)
 
 				hamburger.classList.toggle('active')
 				navMenu.classList.toggle('active')
@@ -116,7 +130,7 @@ export default {
 		},
 		navBarMenu() {
 			const hamburger = document.querySelector('.hamburger')
-			const navMenu = document.querySelector('.nav-menu')
+			const navMenu = document.querySelector('.nav-menu-items-container')
 
 			hamburger.addEventListener('click', mobileMenu)
 
@@ -190,7 +204,9 @@ const closeDropdown = (event) => {
 				if (!containsHamburgerClass) {
 					if (!containsBarClass && !parentContainsHamburgerClass) {
 						const hamburger = document.querySelector('.hamburger')
-						const navMenu = document.querySelector('.nav-menu')
+						const navMenu = document.querySelector(
+							'.nav-menu-items-container',
+						)
 
 						if (
 							hamburger.classList.contains('active') &&
@@ -239,7 +255,7 @@ header {
 			}
 		}
 
-		.nav-menu {
+		.nav-menu-items-container {
 			align-items: center;
 			display: flex;
 			list-style: none;
@@ -247,7 +263,7 @@ header {
 			margin: 0;
 			padding: 0;
 
-			.nav-item {
+			.nav-menu-item {
 				margin: 0 0.5rem;
 
 				ul {
@@ -341,7 +357,7 @@ header {
 @media only screen and (max-width: 768px) {
 	header {
 		.navbar {
-			.nav-menu {
+			.nav-menu-items-container {
 				position: absolute;
 				left: -100%;
 				top: 4.9rem;
@@ -353,7 +369,7 @@ header {
 
 				&.active {
 					left: 0;
-					.nav-item {
+					.nav-menu-item {
 						margin: 0;
 						width: 100%;
 						ul {

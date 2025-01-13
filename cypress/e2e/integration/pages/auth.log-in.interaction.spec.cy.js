@@ -3,7 +3,12 @@ describe('Trip Fotos user auth page > not logged in', () => {
 
 	const urls = {
 		cyAuth: Cypress.env('auth_url'),
-		trips: 'http://localhost:3000/trips',
+		trips: Cypress.config('baseUrl') + Cypress.env('trips_url'),
+	}
+
+	const user = {
+		email: Cypress.env('user_email'),
+		password: Cypress.env('user_password'),
 	}
 
 	const selectors = {
@@ -118,12 +123,9 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		)
 	})
 
-	it.skip('displays the home page when valid email and password details are entered and login button clicked', () => {
-		const email = '' // ADD REGISTERED TRAVELLER'S EMAIL ADDRESS FROM FIREBASE > AUTHENTICATION > USERS LIST
-		const password = '' // ADD PASSWORD ASSOCIATED WITH TRAVELLER
-
-		cy.get('@userAuthEmail').find('input').type(email)
-		cy.get('@userAuthPassword').find('input').type(password)
+	it('displays the home page when valid email and password details are entered and login button clicked', () => {
+		cy.get('@userAuthEmail').find('input').type(user.email)
+		cy.get('@userAuthPassword').find('input').type(user.password)
 		cy.get('@userAuthLoginButton').click()
 
 		cy.url().should('eq', urls.trips)

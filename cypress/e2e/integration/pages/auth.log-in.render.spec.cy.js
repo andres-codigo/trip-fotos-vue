@@ -1,11 +1,11 @@
 describe('Trip Fotos user auth page > not logged in', () => {
 	const urls = {
 		cyAuth: Cypress.env('auth_url'),
-		trips: 'http://localhost:3000/trips',
+		trips: Cypress.config('baseUrl') + Cypress.env('trips_url'),
 	}
 
 	const selectors = {
-		navHeader: '[data-cy="nav-header"]',
+		navHeaderTitleLink: '[data-cy="nav-header-title-link"]',
 		authEmail: '[data-cy="user-auth-email"]',
 		authPassword: '[data-cy="user-auth-password"]',
 		loginButton: '[data-cy="user-auth-login-button"]',
@@ -22,13 +22,13 @@ describe('Trip Fotos user auth page > not logged in', () => {
 	})
 
 	it('Render banner', () => {
-		cy.get(selectors.navHeader).as('navHeader')
+		cy.get(selectors.navHeaderTitleLink).as('navHeaderTitleLink')
 
-		cy.get('@navHeader')
-			.should('have.class', 'header')
+		cy.get('@navHeaderTitleLink')
+			.should('have.class', 'nav-header-title-link')
 			.find('a')
-			.then(($navHeader) => {
-				expect($navHeader.text()).to.equal('Trip Fotos')
+			.then(($navHeaderTitleLink) => {
+				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
 			})
 	})
 
