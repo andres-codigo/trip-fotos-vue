@@ -3,7 +3,11 @@ describe('Trip Fotos logged in', () => {
 
 	const urls = {
 		cyAuth: Cypress.env('auth_url'),
-		trips: Cypress.config('baseUrl') + Cypress.env('trips_url'),
+		root: Cypress.env('root_url'),
+		loginRedirectUrl: Cypress.config('baseUrl') + Cypress.env('trips_url'),
+		logoutRedirectUrl: Cypress.config('baseUrl') + Cypress.env('auth_url'),
+		trips: Cypress.env('trips_url'),
+		messages: Cypress.env('messages_url'),
 	}
 
 	const user = {
@@ -13,7 +17,11 @@ describe('Trip Fotos logged in', () => {
 
 	const selectors = {
 		navHeaderContainer: '[data-cy="nav-header-container"]',
-		navHeaderTitle: '[data-cy="nav-header-title"]',
+		navHeaderTitleLink: '[data-cy="nav-header-title-link"]',
+		navMenuItemMessages: '[data-cy="nav-menu-item-messages"]',
+		navMenuItemAllTravellers: '[data-cy="nav-menu-item-all-travellers"]',
+		navMenuItemLogin: '[data-cy="nav-menu-item-login"]',
+		navMenuItemLogout: '[data-cy="nav-menu-item-logout"]',
 		authEmail: '[data-cy="user-auth-email"]',
 		authPassword: '[data-cy="user-auth-password"]',
 		authLoginButton: '[data-cy="user-auth-login-button"]',
@@ -28,18 +36,23 @@ describe('Trip Fotos logged in', () => {
 		cy.get(selectors.authLoginButton).as('userAuthLoginButton')
 
 		// Functions
-
 		logInUser = (email, password) => {
+			// Ensure the login elements are present
+			cy.get('@userAuthEmail').should('be.visible')
+			cy.get('@userAuthPassword').should('be.visible')
+			cy.get('@userAuthLoginButton').should('be.visible')
+
+			// Log in the user
 			cy.get('@userAuthEmail').find('input').type(email)
 			cy.get('@userAuthPassword').find('input').type(password)
 			cy.get('@userAuthLoginButton').click()
 
 			// Verify URL after login
-			cy.url().should('eq', urls.trips)
+			cy.url().should('eq', urls.loginRedirectUrl)
 		}
 	})
 
-	it('Trip Fotos top container displays correct user options', () => {
+	it('Trip Fotos top container displays Messages, All Travellers, and Logout options', () => {
 		logInUser(user.email, user.password)
 
 		// Intercept the fetch request
@@ -57,13 +70,56 @@ describe('Trip Fotos logged in', () => {
 		// Verify the banner is rendered
 		cy.get(selectors.navHeaderContainer).should('be.visible')
 
-		cy.get(selectors.navHeaderTitle).as('navHeaderTitle')
+		// Aliases
+		cy.get(selectors.navHeaderTitleLink).as('navHeaderTitleLink')
 
-		cy.get('@navHeaderTitle')
-			.should('have.class', 'nav-header')
+		cy.get('@navHeaderTitleLink')
+			.should('be.visible')
+			.and('have.class', 'nav-header-title-link')
 			.find('a')
-			.then(($navHeaderTitle) => {
-				expect($navHeaderTitle.text()).to.equal('Trip Fotos')
+			.then(($navHeaderTitleLink) => {
+				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
+				expect($navHeaderTitleLink).to.have.attr('href', urls.root)
 			})
+
+		cy.get(selectors.navMenuItemMessages).as('navMenuItemMessages')
+
+		cy.get('@navMenuItemMessages')
+			.should('be.visible')
+			.and('have.class', 'nav-menu-item-messages')
+			.find('a')
+			.then(($navMenuItemMessages) => {
+				expect($navMenuItemMessages.text()).to.include('Messages')
+				expect($navMenuItemMessages).to.have.attr('href', urls.messages)
+			})
+
+		cy.get(selectors.navMenuItemAllTravellers).as(
+			'navMenuItemAllTravellers',
+		)
+
+		cy.get('@navMenuItemAllTravellers')
+			.should('be.visible')
+			.and('have.class', 'nav-menu-item-all-travellers')
+			.find('a')
+			.then(($navMenuItemAllTravellers) => {
+				expect($navMenuItemAllTravellers.text()).to.equal(
+					'All Travellers',
+				)
+				expect($navMenuItemAllTravellers).to.have.attr(
+					'href',
+					urls.trips,
+				)
+			})
+
+		cy.get(selectors.navMenuItemLogout).as('navMenuItemLogout')
+
+		cy.get('@navMenuItemLogout')
+			.should('be.visible')
+			.and('have.class', 'nav-menu-item-logout')
+			.find('button')
+			.should('contain.text', 'Logout Nick Bond')
+			.click()
+
+		cy.url().should('eq', urls.logoutRedirectUrl)
 	})
 })

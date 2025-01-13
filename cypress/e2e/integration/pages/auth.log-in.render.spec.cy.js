@@ -5,7 +5,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 	}
 
 	const selectors = {
-		navHeaderTitle: '[data-cy="nav-header-title"]',
+		navHeaderTitleLink: '[data-cy="nav-header-title-link"]',
 		authEmail: '[data-cy="user-auth-email"]',
 		authPassword: '[data-cy="user-auth-password"]',
 		loginButton: '[data-cy="user-auth-login-button"]',
@@ -22,13 +22,13 @@ describe('Trip Fotos user auth page > not logged in', () => {
 	})
 
 	it('Render banner', () => {
-		cy.get(selectors.navHeaderTitle).as('navHeaderTitle')
+		cy.get(selectors.navHeaderTitleLink).as('navHeaderTitleLink')
 
-		cy.get('@navHeaderTitle')
-			.should('have.class', 'nav-header')
+		cy.get('@navHeaderTitleLink')
+			.should('have.class', 'nav-header-title-link')
 			.find('a')
-			.then(($navHeaderTitle) => {
-				expect($navHeaderTitle.text()).to.equal('Trip Fotos')
+			.then(($navHeaderTitleLink) => {
+				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
 			})
 	})
 
