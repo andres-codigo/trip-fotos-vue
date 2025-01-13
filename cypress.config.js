@@ -7,6 +7,7 @@ export default defineConfig({
 	e2e: {
 		baseUrl: 'http://localhost:3000',
 		env: {
+			root_url: '/',
 			auth_url: '/auth',
 			trips_url: '/trips',
 			register_url: '/register',
