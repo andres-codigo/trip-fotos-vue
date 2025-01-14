@@ -19,6 +19,7 @@ describe('Trip Fotos logged in', () => {
 		navHeaderContainer: '[data-cy="nav-header-container"]',
 		navHeaderTitleLink: '[data-cy="nav-header-title-link"]',
 		navMenuItemMessages: '[data-cy="nav-menu-item-messages"]',
+		totalMessages: '[data-cy="total-messages"]',
 		navMenuItemAllTravellers: '[data-cy="nav-menu-item-all-travellers"]',
 		navMenuItemLogin: '[data-cy="nav-menu-item-login"]',
 		navMenuItemLogout: '[data-cy="nav-menu-item-logout"]',
@@ -121,5 +122,13 @@ describe('Trip Fotos logged in', () => {
 			.click()
 
 		cy.url().should('eq', urls.logoutRedirectUrl)
+	})
+	it.only('Displays total messages counter on message button for user', () => {
+		logInUser(user.email, user.password)
+
+		cy.get(selectors.totalMessages).as('totalMessages')
+		cy.get('@totalMessages')
+			.should('have.class', 'total-messages')
+			.and('contain.text', '1')
 	})
 })
