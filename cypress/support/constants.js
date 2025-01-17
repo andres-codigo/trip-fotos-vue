@@ -1,15 +1,10 @@
-export const appTestTypes = {
-	appTitle: 'Trip Fotos',
-	appMessagesButtonText: 'Messages',
-	appAllTravellersButtonText: 'All Travellers',
-	appLogoutButtonText: 'Logout ',
-}
-
 export const user = {
 	email: Cypress.env('user_email'),
 	password: Cypress.env('user_password'),
 	userFirstAndLastName: 'Nick Bond',
 	userTotalMessages: 1,
+	validEmail: 'valid@email.com',
+	invalidEmail: 'invalid@email',
 }
 
 export const baseUrl = Cypress.config('baseUrl')
@@ -29,9 +24,18 @@ export const domAttributeUrls = {
 }
 
 export const authSelectors = {
+	authContainer: '[data-cy="user-authentication"]',
 	authEmail: '[data-cy="user-auth-email"]',
 	authPassword: '[data-cy="user-auth-password"]',
 	authLoginButton: '[data-cy="user-auth-login-button"]',
+	authErrorMessageEmail: '[data-cy="user-auth-email-error"]',
+	authErrorMessagePassword: '[data-cy="user-auth-password-error"]',
+}
+
+export const authErrorMessages = {
+	authEmail: 'Please enter a valid email address.',
+	authPassword:
+		'Your password must be a minimum of 8 characters long! 8 characters left',
 }
 
 export const topNavigationSelectors = {

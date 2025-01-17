@@ -1,5 +1,4 @@
 import {
-	appTestTypes,
 	user,
 	urls,
 	domAttributeUrls,
@@ -59,9 +58,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 			.and('have.class', 'nav-header-title-link')
 			.find('a')
 			.then(($navHeaderTitleLink) => {
-				expect($navHeaderTitleLink.text()).to.equal(
-					appTestTypes.appTitle,
-				)
+				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
 				expect($navHeaderTitleLink).to.have.attr(
 					'href',
 					domAttributeUrls.root,
@@ -74,9 +71,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 			.and('have.class', 'nav-menu-item-messages')
 			.find('a')
 			.then(($navMenuItemMessages) => {
-				expect($navMenuItemMessages.text()).to.include(
-					appTestTypes.appMessagesButtonText,
-				)
+				expect($navMenuItemMessages.text()).to.include('Messages')
 				expect($navMenuItemMessages).to.have.attr(
 					'href',
 					domAttributeUrls.messages,
@@ -90,7 +85,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 			.find('a')
 			.then(($navMenuItemAllTravellers) => {
 				expect($navMenuItemAllTravellers.text()).to.equal(
-					appTestTypes.appAllTravellersButtonText,
+					'All Travellers',
 				)
 				expect($navMenuItemAllTravellers).to.have.attr(
 					'href',
@@ -103,10 +98,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 			.should('be.visible')
 			.and('have.class', 'nav-menu-item-logout')
 			.find('button')
-			.should(
-				'contain.text',
-				appTestTypes.appLogoutButtonText + user.userFirstAndLastName,
-			)
+			.should('contain.text', 'Logout ' + user.userFirstAndLastName)
 	})
 	it('Displays total messages counter on message button for user', () => {
 		logInUser(user.email, user.password)
