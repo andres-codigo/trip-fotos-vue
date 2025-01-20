@@ -20,10 +20,12 @@
 								>Messages
 								<span
 									v-if="!!totalMessages && totalMessages > 0"
-									class="messages-counter-container"
-									><span class="counter">{{
-										totalMessages
-									}}</span></span
+									class="total-messages-container"
+									><span
+										class="total-messages"
+										data-cy="total-messages"
+										>{{ totalMessages }}</span
+									></span
 								>
 							</router-link>
 						</li>
@@ -285,7 +287,7 @@ header {
 					position: relative;
 					text-decoration: none;
 
-					.messages-counter-container {
+					.total-messages-container {
 						--size: 1.4rem;
 						--font-size: 0.75rem;
 						appearance: none;
@@ -301,7 +303,7 @@ header {
 
 						@include mixins.fadeIn(ease, 2s, 1, forwards);
 
-						.counter {
+						.total-messages {
 							display: inline-block;
 							font-size: var(--font-size);
 							position: relative;
@@ -312,7 +314,7 @@ header {
 
 					&:hover {
 						color: variables.$color-lavender-magenta;
-						.messages-counter-container {
+						.total-messages-container {
 							border: 1px solid variables.$color-pigment-indigo;
 						}
 					}
@@ -321,14 +323,14 @@ header {
 						border: 1px solid variables.$color-white;
 						color: variables.$color-white;
 
-						.messages-counter-container {
+						.total-messages-container {
 							border: 1px solid variables.$color-pigment-indigo;
 						}
 						&:hover {
 							border: 1px solid variables.$color-lavender-magenta;
 							color: variables.$color-lavender-magenta;
 
-							.messages-counter-container {
+							.total-messages-container {
 								border: 1px solid
 									variables.$color-pigment-indigo;
 							}
@@ -395,7 +397,7 @@ header {
 							padding: 1.25rem 0;
 							width: 100%;
 
-							.messages-counter-container {
+							.total-messages-container {
 								--size: 2rem;
 								--font-size: 1rem;
 								appearance: none;
@@ -404,7 +406,7 @@ header {
 
 								@include mixins.fadeIn(ease, 2s, 1, forwards);
 
-								.counter {
+								.total-messages {
 									bottom: 1px;
 									display: inline-block;
 									font-size: var(--font-size);
@@ -417,7 +419,7 @@ header {
 							&:active,
 							&:hover {
 								color: variables.$color-lavender-magenta;
-								.messages-counter-container {
+								.total-messages-container {
 									border: none;
 								}
 							}

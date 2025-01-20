@@ -78,7 +78,7 @@ export default [
 		files: ['**/*.spec.cy.js'],
 		ignores: ['cypress.config.js'],
 		languageOptions: {
-			sourceType: 'commonjs',
+			sourceType: 'module',
 			globals: {
 				...globals.node,
 				...globals.amd,
