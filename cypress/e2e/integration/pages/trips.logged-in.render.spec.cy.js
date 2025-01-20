@@ -6,7 +6,7 @@ import {
 	topNavigationSelectors,
 } from '../../../support/constants'
 
-describe('User Logged in and redirected to home page render tests', () => {
+describe('User Login and Home Page Redirection Render Tests', () => {
 	let logInUser
 
 	beforeEach(() => {
@@ -34,7 +34,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 		}
 	})
 
-	it('Trip Fotos top container displays Messages, All Travellers, and Logout options', () => {
+	it('The top navigation container displays the Messages, All Travelers, and Logout options', () => {
 		logInUser(user.email, user.password)
 
 		// Aliases
@@ -100,7 +100,7 @@ describe('User Logged in and redirected to home page render tests', () => {
 			.find('button')
 			.should('contain.text', 'Logout ' + user.userFirstAndLastName)
 	})
-	it('Displays total messages counter on message button for user', () => {
+	it('Displays the total message count on the Messages button', () => {
 		logInUser(user.email, user.password)
 
 		cy.get(topNavigationSelectors.totalMessages).as('totalMessages')

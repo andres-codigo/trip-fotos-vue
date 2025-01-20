@@ -5,7 +5,7 @@ import {
 	topNavigationSelectors,
 } from '../../../support/constants'
 
-describe('User Logged in and redirected to home page interactions tests ', () => {
+describe('User Login and Home Page Redirection Interaction Tests', () => {
 	let logInUser
 
 	beforeEach(() => {
@@ -33,7 +33,7 @@ describe('User Logged in and redirected to home page interactions tests ', () =>
 		}
 	})
 
-	it('Top navigation displays Title, Messages, All Travellers, and Logout options', () => {
+	it('The top navigation displays the Title, Messages, All Travelers, and Logout options, and user is able to interact with each option', () => {
 		logInUser(user.email, user.password)
 
 		// Aliases
@@ -66,16 +66,8 @@ describe('User Logged in and redirected to home page interactions tests ', () =>
 		cy.get('@navMenuItemAllTravellers').click()
 		cy.url().should('eq', urls.trips)
 
-		// Verify clicking the Logout button logsthe user out and redirects to the Login page
+		// Verify clicking the Logout button logs the user out and redirects to the Login page
 		cy.get('@navMenuItemLogout').click()
 		cy.url().should('eq', urls.logoutRedirectUrl)
-	})
-	it('Displays total messages counter on Messages button', () => {
-		logInUser(user.email, user.password)
-
-		cy.get(topNavigationSelectors.totalMessages).as('totalMessages')
-		cy.get('@totalMessages')
-			.should('have.class', 'total-messages')
-			.and('contain.text', user.userTotalMessages)
 	})
 })

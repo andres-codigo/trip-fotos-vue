@@ -4,12 +4,12 @@ import {
 	topNavigationSelectors,
 } from '../../../support/constants'
 
-describe('Trip Fotos user auth page > not logged in', () => {
+describe('User Login Render Tests', () => {
 	beforeEach(() => {
 		cy.visit(urls.cyAuth)
 	})
 
-	it('Render banner', () => {
+	it('The top navigation container displays the Application Title as a link', () => {
 		cy.get(topNavigationSelectors.navHeaderTitleLink).as(
 			'navHeaderTitleLink',
 		)
@@ -22,7 +22,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 			})
 	})
 
-	it('Render login form', () => {
+	it('The login form is displayed', () => {
 		cy.get('.user-authentication').as('userAuthentication')
 
 		cy.get('@userAuthentication')

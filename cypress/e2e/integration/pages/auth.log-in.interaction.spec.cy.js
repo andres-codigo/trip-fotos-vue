@@ -5,7 +5,7 @@ import {
 	authErrorMessages,
 } from '../../../support/constants'
 
-describe('Trip Fotos user auth page > not logged in', () => {
+describe('User Login Interaction Tests', () => {
 	let invalidInputTest
 
 	beforeEach(() => {
@@ -27,7 +27,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		}
 	})
 
-	it('displays email error message when input is empty', () => {
+	it('Displays an email error message when the input is empty', () => {
 		cy.get('@userAuthEmail').find('input').focus().blur()
 		invalidInputTest(
 			'@userAuthEmail',
@@ -36,7 +36,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		)
 	})
 
-	it('displays email error message when email is invalid', () => {
+	it('Displays an email error message when the email is invalid', () => {
 		cy.get('@userAuthEmail').find('input').type(user.invalidEmail)
 		invalidInputTest(
 			'@userAuthEmail',
@@ -45,7 +45,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		)
 	})
 
-	it('displays no email error message when email typed becomes valid', () => {
+	it('Displays no email error message when the email entered becomes valid', () => {
 		cy.get('@userAuthEmail').find('input').type(user.validEmail)
 
 		cy.get('@userAuthEmail')
@@ -55,7 +55,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 			.should('not.exist')
 	})
 
-	it('displays password error message when input is empty', () => {
+	it('Displays a password error message when the input is empty.', () => {
 		cy.get('@userAuthPassword').find('input').focus().blur()
 		invalidInputTest(
 			'@userAuthPassword',
@@ -64,7 +64,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		)
 	})
 
-	it('displays and counts down remaining password characters needed to meet minimum password length requirement in error message', () => {
+	it('Displays and counts down the remaining characters needed to meet the minimum password length requirement in the error message', () => {
 		const minLength = 8
 		const password = '12345678'
 
@@ -92,7 +92,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		}
 	})
 
-	it('displays email and password error messages when inputs are empty and login button clicked', () => {
+	it('Displays error messages for email and password when the inputs are empty and the login button is clicked', () => {
 		cy.get('@userAuthLoginButton').click()
 		invalidInputTest(
 			'@userAuthEmail',
@@ -106,7 +106,7 @@ describe('Trip Fotos user auth page > not logged in', () => {
 		)
 	})
 
-	it('displays the home page when valid email and password details are entered and login button clicked', () => {
+	it('Displays the home page when valid email and password are entered and the login button is clicked', () => {
 		cy.get('@userAuthEmail').find('input').type(user.email)
 		cy.get('@userAuthPassword').find('input').type(user.password)
 		cy.get('@userAuthLoginButton').click()
