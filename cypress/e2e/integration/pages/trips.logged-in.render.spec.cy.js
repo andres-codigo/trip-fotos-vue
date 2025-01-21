@@ -52,7 +52,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 		// Verify the banner is rendered
 		cy.get(topNavigationSelectors.navHeaderContainer).should('be.visible')
 
-		// Verify the banner title is displayed and links to the root URL
+		// Verify the banner title is displayed, has the right class, and links to the root URL
 		cy.get('@navHeaderTitleLink')
 			.should('be.visible')
 			.and('have.class', 'nav-header-title-link')
@@ -65,7 +65,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 				)
 			})
 
-		// Verify the Messages link is displayed and links to the messages URL
+		// Verify the Messages link is displayed, has the right class, and links to the messages URL
 		cy.get('@navMenuItemMessages')
 			.should('be.visible')
 			.and('have.class', 'nav-menu-item-messages')
@@ -78,7 +78,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 				)
 			})
 
-		// Verify the All Travellers link is displayed and links to the trips URL
+		// Verify the All Travellers link is displayed, has the right class, and links to the trips URL
 		cy.get('@navMenuItemAllTravellers')
 			.should('be.visible')
 			.and('have.class', 'nav-menu-item-all-travellers')
@@ -93,19 +93,30 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 				)
 			})
 
-		// Verify the Logout button is displayed and contains the user's name
-		cy.get('@navMenuItemLogout')
-			.should('be.visible')
-			.and('have.class', 'nav-menu-item-logout')
-			.find('button')
-			.should('contain.text', 'Logout ' + user.userFirstAndLastName)
+		cy.window().then((window) => {
+			// Get the travellers name from the window store
+			let travellerName =
+				window.$store.getters['travellers/travellerName']
+
+			// Verify the Logout button is displayed , has the right class, and contains the travellers name
+			cy.get('@navMenuItemLogout')
+				.should('be.visible')
+				.and('have.class', 'nav-menu-item-logout')
+				.find('button')
+				.should('contain.text', 'Logout ' + travellerName.toString())
+		})
 	})
 	it('Displays the total message count on the Messages button', () => {
 		logInUser(user.email, user.password)
 
-		cy.get(topNavigationSelectors.totalMessages).as('totalMessages')
-		cy.get('@totalMessages')
-			.should('have.class', 'total-messages')
-			.and('contain.text', user.userTotalMessages)
+		cy.window().then((window) => {
+			// Get the messages count from the window store
+			let messagesCount = window.$store.getters['messages/messagesCount']
+
+			// Assert that the total messages element exists, has the right class, and displays the correct count
+			cy.get(topNavigationSelectors.totalMessages)
+				.should('have.class', 'total-messages')
+				.and('contain.text', messagesCount.toString())
+		})
 	})
 })

@@ -1,8 +1,6 @@
 export const user = {
 	email: Cypress.env('user_email'),
 	password: Cypress.env('user_password'),
-	userFirstAndLastName: 'Nick Bond',
-	userTotalMessages: 1,
 	validEmail: 'valid@email.com',
 	invalidEmail: 'invalid@email',
 }

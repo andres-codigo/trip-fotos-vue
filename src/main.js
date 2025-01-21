@@ -26,6 +26,8 @@ const BaseDialog = defineAsyncComponent(
 	() => import('@/components/ui/BaseDialog.vue'),
 )
 
+window.$store = store
+
 const app = createApp(App)
 
 app.use(VueFire, {
