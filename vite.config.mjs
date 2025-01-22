@@ -9,7 +9,20 @@ export default defineConfig({
 		port: 3000,
 		open: true,
 	},
+	preview: {
+		port: 3001,
+		open: true,
+	},
 	plugins: [vue(), eslintPlugin()],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `
+              @use '@/styles/global.scss' as global;
+            `,
+			},
+		},
+	},
 	resolve: {
 		alias: [
 			{
@@ -18,15 +31,6 @@ export default defineConfig({
 			},
 		],
 		extensions: ['.js', '.json', '.mjs', '.vue', 'svg', 'scss'],
-	},
-	css: {
-		preprocessorOptions: {
-			scss: {
-				additionalData: `
-              @use './src/styles/global.scss' as global;
-            `,
-			},
-		},
 	},
 	build: {
 		rollupOptions: {

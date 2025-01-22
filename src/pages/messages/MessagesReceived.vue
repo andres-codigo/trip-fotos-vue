@@ -23,7 +23,7 @@
 						:message="req.message"></message-item>
 				</ul>
 				<h3 v-else class="no-messages">
-					You haven't messages any messages yet!
+					You don't have any messages yet!
 				</h3>
 			</base-card>
 		</section>
