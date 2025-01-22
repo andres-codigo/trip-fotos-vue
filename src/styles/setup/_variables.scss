@@ -1,28 +1,38 @@
 /*
-	Color naming convention taken from
-	'Name that Color' color wheel by
-	Chirag Mehta
-	https://chir.ag/projects/name-that-color/#6195ED
+    Color naming convention taken from
+    'Name that Color' color wheel by
+    Chirag Mehta
+    https://chir.ag/projects/name-that-color/#6195ED
 */
+
+// Grays
 $color-alto: #cecece;
-$color-azure: #f0ffff;
-$color-black: #000000;
-$color-blue-chalk: #edd2ff;
-$color-el-salva: #933933;
-$color-fresh-eggplant: #8d007a;
-$color-japanese-laurel: #088a00;
-$color-lavender-magenta: #f391e3;
-$color-magnolia: #faf6ff;
-$color-mantis: #66c360;
 $color-mine-shaft: #333333;
+$color-tundora: #424242;
+$color-silver: #eee8e8;
+$color-black: #000000;
+$color-white: #ffffff;
+
+// Blues
+$color-azure: #f0ffff;
+$color-selago: #f0e6fd;
+$color-pigment-indigo: #3d008d;
+
+// Reds
+$color-el-salva: #933933;
 $color-mojo: #df0d0d;
 $color-mojo-otro: #e72c2c;
-$color-pigment-indigo: #3d008d;
-$color-purple: #71008d;
 $color-red: #ff0000;
+
+// Purples
+$color-blue-chalk: #edd2ff;
+$color-fresh-eggplant: #8d007a;
+$color-lavender-magenta: #f391e3;
+$color-magnolia: #faf6ff;
+$color-purple: #71008d;
 $color-ripe-eggplant: #640c9f;
 $color-ripe-plum: #3a0061;
-$color-selago: #f0e6fd;
-$color-silver: #eee8e8;
-$color-tundora: #424242;
-$color-white: #ffffff;
+
+// Greens
+$color-japanese-laurel: #088a00;
+$color-mantis: #66c360;

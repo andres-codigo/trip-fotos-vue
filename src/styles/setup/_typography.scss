@@ -1,3 +1,4 @@
+// Import Roboto font
 @font-face {
 	font-family: 'Roboto';
 	font-weight: 400;
@@ -6,5 +7,5 @@
 	unicode-range: U+000-5FF;
 	src:
 		local('Roboto'),
-		url('@/assets/fonts/Roboto-Regular.ttf') format('font-type');
+		url('@/assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
