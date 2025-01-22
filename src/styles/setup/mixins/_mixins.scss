@@ -1,3 +1,8 @@
+// Variables
+$default-opacity: 0.3;
+$prefixes: '-moz-', '-webkit-', '-o-', '-ms-', '';
+
+// Mixin for user-select
 @mixin user-select($value) {
 	-webkit-touch-callout: $value; /* iOS Safari */
 	-webkit-user-select: $value; /* Safari */
@@ -6,16 +11,18 @@
 	user-select: $value; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-@mixin background-opacity($color, $opacity: 0.3) {
+// Mixin for background opacity
+@mixin background-opacity($color, $opacity: $default-opacity) {
 	background: $color;
 	/* The Fallback */
 	background: rgba($color, $opacity);
 }
 
-$prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
+
 // ********************
 // START fadeIn
 // ********************
+// Keyframe mixin
 @mixin keyframe-fadeIn {
 	0% {
 		opacity: 0;
@@ -25,6 +32,7 @@ $prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
 		opacity: 1;
 	}
 }
+
 @-moz-keyframes fadeIn {
 	@include keyframe-fadeIn;
 }
@@ -40,17 +48,20 @@ $prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
 @keyframes fadeIn {
 	@include keyframe-fadeIn;
 }
+
+// Mixin for fadeIn animation
 @mixin fadeIn($type, $duration, $count, $mode) {
 	$keyframe-name: fadeIn;
-	@each $p in $prefix {
-		#{$p}animation: $keyframe-name $type $duration;
-		#{$p}animation-iteration-count: $count;
-		#{$p}animation-fill-mode: $mode;
+
+	@each $prefix in $prefixes {
+		#{$prefix}animation: $keyframe-name $type $duration;
+		#{$prefix}animation-iteration-count: $count;
+		#{$prefix}animation-fill-mode: $mode;
 	}
 }
-//
-// e.g. @include fadeIn( ease, 2s, 1, forwards );
-//
+
+// Example usage: @include fadeIn( ease, 2s, 1, forwards );
+
 
 // ********************
 // END fadeIn
@@ -67,46 +78,31 @@ $prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
 	}
 }
 
-@mixin media-query-min-width-image-resizing($min-width, $max-image-width) {
-	@media only screen and (min-width: $min-width) {
+// Media query mixins
+@mixin media-query($query, $max-image-width) {
+	@media only screen and #{$query} {
 		@include section-image-dom($max-image-width);
 	}
+}
+
+@mixin media-query-min-width-image-resizing($min-width, $max-image-width) {
+	@include media-query("(min-width: #{$min-width})", $max-image-width);
 }
 
 @mixin media-query-max-width-image-resizing($max-width, $max-image-width) {
-	@media only screen and (max-width: $max-width) {
-		@include section-image-dom($max-image-width);
-	}
+	@include media-query("(max-width: #{$max-width})", $max-image-width);
 }
 
-@mixin media-query-min-max-width-image-resizing(
-	$min-width,
-	$max-width,
-	$max-image-width
-) {
-	@media only screen and (min-width: $min-width) and (max-width: $max-width) {
-		@include section-image-dom($max-image-width);
-	}
+@mixin media-query-min-max-width-image-resizing($min-width, $max-width, $max-image-width) {
+	@include media-query("(min-width: #{$min-width}) and (max-width: #{$max-width})", $max-image-width);
 }
 
-@mixin media-query-max-device-width-image-resizing(
-	$max-width,
-	$max-image-width
-) {
-	@media only screen and (max-device-width: $max-width) {
-		@include section-image-dom($max-image-width);
-	}
+@mixin media-query-max-device-width-image-resizing($max-width, $max-image-width) {
+	@include media-query("(max-device-width: #{$max-width})", $max-image-width);
 }
 
-@mixin media-query-ipad-orientation-min-max-device-width-image-resizing(
-	$min-device-width,
-	$max-device-width,
-	$orientation,
-	$max-image-width
-) {
-	@media only screen and (min-device-width: $min-device-width) and (max-device-width: $max-device-width) and (orientation: $orientation) {
-		@include section-image-dom($max-image-width);
-	}
+@mixin media-query-ipad-orientation-min-max-device-width-image-resizing($min-device-width, $max-device-width, $orientation, $max-image-width) {
+	@include media-query("(min-device-width: #{$min-device-width}) and (max-device-width: #{$max-device-width}) and (orientation: #{$orientation})", $max-image-width);
 }
 // ********************
 // END dialog image resizing media queries

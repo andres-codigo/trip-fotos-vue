@@ -7,21 +7,26 @@
 
 html {
 	font-family: 'Roboto', sans-serif;
-	body {
-		margin: 0;
-		#app {
-			height: 100vh;
-			section {
-				min-width: 300px;
-				width: 100%;
-			}
-			li {
-				list-style: none;
-			}
-
-			a {
-				text-decoration: none;
-			}
-		}
-	}
 }
+
+body {
+	margin: 0;
+}
+
+#app {
+	height: 100vh;
+}
+
+section {
+	min-width: 300px;
+	width: 100%;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+

@@ -1,9 +1,23 @@
+// Forward typography settings
 @forward './setup/typography';
+
+// Forward mixins
 @forward './setup/mixins/mixins';
+
+// Forward form valid state mixins
 @forward './setup/mixins/form/valid/valid';
+
+// Forward form invalid state mixins
 @forward './setup/mixins/form/invalid/invalid';
+
+// Forward variables
 @forward './setup/variables';
+
+// Forward routing styles
 @forward './setup/routing';
+
+// Forward main styles
 @forward './setup/main';
 
+// Forward traveller component styles
 @forward './components/_travellers';
