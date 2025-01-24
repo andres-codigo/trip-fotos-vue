@@ -135,15 +135,14 @@ export default {
 				throw new Error(APIErrorMessageConstants.LOAD_TRAVELLER)
 			}
 		} catch {
-			// catch (error)
-			// console.error(error)
+			console.error('Error loading traveller:', error)
 			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
 		}
 	},
 
 	async updateTravellers(context) {
 		const response = await fetch(
-			APIConstants.BASE_URL + `/travellers.json`,
+			APIConstants.BASE_URL + '/travellers.json',
 			{
 				method: APIConstants.GET,
 				headers: {
