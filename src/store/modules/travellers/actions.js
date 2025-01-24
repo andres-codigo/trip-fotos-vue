@@ -135,7 +135,8 @@ export default {
 				throw new Error(APIErrorMessageConstants.LOAD_TRAVELLER)
 			}
 		} catch {
-			console.error('Error loading traveller:', error)
+			// catch (error)
+			// console.error(error)
 			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
 		}
 	},
