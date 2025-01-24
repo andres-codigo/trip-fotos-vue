@@ -21,9 +21,9 @@ export default [
 	pluginCypress.configs.globals,
 	includeIgnoreFile(gitignorePath),
 	...compat.extends(
-		'plugin:vue/vue3-recommended',
 		'eslint:recommended',
-		'prettier',
+		'plugin:vue/vue3-recommended',
+		'plugin:prettier/recommended',
 	),
 	...compat.env({
 		es2020: true,
@@ -47,9 +47,11 @@ export default [
 			},
 		},
 		rules: {
-			'no-console': 'off',
-			'no-debugger': 'off',
+			'no-console': 'warn',
+			'no-debugger': 'warn',
 			'vue/multi-word-component-names': 'off',
+			'prettier/prettier': 'error',
+			quotes: ['error', 'single'],
 		},
 	},
 	// vue defaults
