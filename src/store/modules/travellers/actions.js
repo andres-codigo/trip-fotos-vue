@@ -143,7 +143,7 @@ export default {
 
 	async updateTravellers(context) {
 		const response = await fetch(
-			APIConstants.BASE_URL + `/travellers.json`,
+			APIConstants.BASE_URL + '/travellers.json',
 			{
 				method: APIConstants.GET,
 				headers: {

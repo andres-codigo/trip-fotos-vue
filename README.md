@@ -22,14 +22,17 @@ Tailored to be developed using Visual Studio Code.
 
 ## Stack
 
--   Vite for development and build.
--   Vue 3 as Front-End Library.
--   Vue Router for routing.
--   Vuex for State Management.
--   Cypress for front end testing
--   Firebase Realtime Database for storing Travellers and Messages.
--   Firebase Authentication for storing Sign-in credentials.
--   Firebase Cloud Storage for storing uploaded traveller images.
+-   [Vite](https://vite.dev/) for development and build.
+-   [Vue 3](https://vuejs.org/) as Front-End Library.
+-   [Vue Router](https://router.vuejs.org/) for Vue.js routing.
+-   [Vuex](https://vuex.vuejs.org/) for State Management.
+-   [SASS](https://sass-lang.com/) for CSS preprocessing
+-   [ESLint](https://eslint.org/) for JavaScript linting
+-   [Prettier](https://prettier.io/) for code formatting
+-   [Cypress](https://www.cypress.io/) for frontend test automation
+-   [Firebase Realtime Database](https://firebase.google.com/docs/database) for storing Travellers and Messages.
+-   [Firebase Authentication](https://firebase.google.com/docs/auth) for storing Sign-in credentials.
+-   [Firebase Cloud Storage](https://firebase.google.com/docs/storage) for storing uploaded traveller images.
 
 ## Installation
 
@@ -110,10 +113,16 @@ CYPRESS_USER_PASSWORD=''
 npm run dev
 ```
 
-### ESLints and fixes files test suite for the project
+### ESLints and fixes files for the project
 
 ```
-npm run lint
+npm run lint:js
+```
+
+or to fix issues automatically
+
+```
+npm run lint:fix
 ```
 
 ### Prettier and reformat files on the project based on '.prettierrc.json' configuration file
@@ -122,7 +131,7 @@ npm run lint
 npm run format
 ```
 
-## Cypress Testing
+### Cypress for frontend test automation
 
 ```
 npx cypress open
