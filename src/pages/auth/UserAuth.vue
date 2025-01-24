@@ -118,7 +118,11 @@ export default {
 	},
 	methods: {
 		validateEmail(value) {
-			if (/^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,3})+$/.test(value)) {
+			if (
+				/^[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([._-]?[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,3})+$/.test(
+					value,
+				)
+			) {
 				this.email.isValid = true
 				this.formIsValid = true
 				this.email.message = ''
