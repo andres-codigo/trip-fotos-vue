@@ -1,4 +1,11 @@
 <template>
+	<base-dialog
+		:show="!!error"
+		:is-error="!!error"
+		title="An error occurred!"
+		@close="handleError">
+		<p>{{ error }}</p>
+	</base-dialog>
 	<form autocomplete="on" @submit.prevent="submitForm">
 		<div :class="['form-control', { invalid: !name.isValid }]">
 			<label for="name">{{ name.label }}</label>
@@ -59,6 +66,7 @@ export default {
 				isValid: true,
 			},
 			formIsValid: true,
+			error: null,
 		}
 	},
 	computed: {
@@ -78,6 +86,9 @@ export default {
 		}
 	},
 	methods: {
+		handleError() {
+			this.error = null
+		},
 		setUser() {
 			let userName = this.$store.getters.userName
 			let userEmail = this.$store.getters.userEmail
@@ -128,20 +139,27 @@ export default {
 				this.formIsValid = false
 			}
 		},
-		submitForm() {
-			this.validateForm()
+		async submitForm() {
+			try {
+				this.validateForm()
 
-			if (!this.formIsValid) {
-				return
+				if (!this.formIsValid) {
+					return
+				}
+
+				await this.$store
+					.dispatch('messages/contactTraveller', {
+						name: this.name.val,
+						email: this.email.val,
+						message: this.message.val,
+						travellerId: this.$route.params.id,
+					})
+					.then(() => {
+						this.$router.replace('/trips')
+					})
+			} catch (error) {
+				this.error = error.message || 'Something went wrong!'
 			}
-
-			this.$store.dispatch('messages/contactTraveller', {
-				name: this.name.val,
-				email: this.email.val,
-				message: this.message.val,
-				travellerId: this.$route.params.id,
-			})
-			this.$router.replace('/trips')
 		},
 	},
 }
