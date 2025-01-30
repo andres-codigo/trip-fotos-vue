@@ -1,7 +1,9 @@
 export const APIErrorMessageConstants = Object.freeze({
 	// GENERAL
 	GENERIC_MESSAGE: 'Something went wrong!',
-	CATCH_MESSAGE: 'There has been a problem with your fetch operation.',
+	CATCH_MESSAGE: 'A problem was encountered with the fetch operation.',
+	RESPONSE_MESSAGE: 'Request failed with status: ',
+	INVALID_PAYLOAD: 'Invalid payload.',
 
 	// AUTHENTICATION
 	LOGIN_TYPE_EMAIL_EXISTS: 'EMAIL_EXISTS',
