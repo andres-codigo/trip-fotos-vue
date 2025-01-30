@@ -82,10 +82,12 @@
 import { ref } from 'vue'
 
 export default {
+	emits: ['before-update-hook-complete'],
 	data() {
 		return {
 			travellerName: '',
 			totalMessages: null,
+			beforeUpdateHookCompleted: false,
 		}
 	},
 	computed: {
@@ -119,6 +121,8 @@ export default {
 			if (this.totalMessages === null) {
 				this.setMessageCount()
 			}
+			this.beforeUpdateHookCompleted = true
+			this.$emit('before-update-hook-complete')
 		}
 	},
 	methods: {
