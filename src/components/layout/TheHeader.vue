@@ -2,21 +2,24 @@
 	<header class="header" data-cy="nav-header-container">
 		<nav class="navbar">
 			<h1 class="nav-header-title-link" data-cy="nav-header-title-link">
-				<router-link to="/">Trip Fotos</router-link>
+				<router-link :to="{ name: 'trips-root' }"
+					>Trip Fotos</router-link
+				>
 			</h1>
 			<ul
-				v-show="open"
-				v-click-outside="closeDropdown"
+				v-click-outside="closeHamburgerMenu"
 				class="nav-menu-items-container"
 				data-cy="nav-menu-items-container">
-				<li class="nav-menu-item">
+				<li v-if="isLoggedIn" class="nav-menu-item">
 					<ul>
 						<li
-							v-if="isLoggedIn && isTraveller"
+							v-if="isTraveller"
 							class="nav-menu-item-messages"
 							data-cy="nav-menu-item-messages"
 							@click.prevent="toggleHamburgerMenuActiveClass()">
-							<router-link to="/messages" class="nav-link"
+							<router-link
+								:to="{ name: 'messages' }"
+								class="nav-link"
 								>Messages
 								<span
 									v-if="!!totalMessages && totalMessages > 0"
@@ -30,11 +33,12 @@
 							</router-link>
 						</li>
 						<li
-							v-if="isLoggedIn"
 							class="nav-menu-item-all-travellers"
 							data-cy="nav-menu-item-all-travellers"
 							@click.prevent="toggleHamburgerMenuActiveClass()">
-							<router-link to="/trips" class="nav-link"
+							<router-link
+								:to="{ name: 'trips-list' }"
+								class="nav-link"
 								>All Travellers</router-link
 							>
 						</li>
@@ -47,7 +51,7 @@
 					@click.prevent="toggleHamburgerMenuActiveClass()"
 				>
 					<router-link
-						to="/auth"
+						:to="{name" 'auth'}"
 						class="nav-link"
 						data-cy="nav-login-link"
 						>Login</router-link
@@ -62,7 +66,10 @@
 					>
 				</li>
 			</ul>
-			<div class="hamburger">
+			<div
+				v-show="isLoggedIn && $route.name !== 'auth'"
+				class="hamburger"
+				@click="closeHamburgerMenu">
 				<span class="bar"></span>
 				<span class="bar"></span>
 				<span class="bar"></span>
@@ -72,6 +79,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
 	data() {
 		return {
@@ -100,12 +109,6 @@ export default {
 		messagesCount(count) {
 			this.totalMessages = count
 		},
-	},
-	created() {
-		if (this.isLoggedIn) {
-			this.setTravellerName()
-			this.setMessageCount()
-		}
 	},
 	mounted() {
 		this.navBarMenu()
@@ -172,57 +175,57 @@ export default {
 				this.$router.go('/')
 			})
 		},
-	},
-}
-</script>
+		closeHamburgerMenu(event) {
+			const open = ref(true)
 
-<script setup>
-import { ref } from 'vue'
+			if (document.documentElement.clientWidth <= 768) {
+				const eventClassList = event.target.classList
 
-// State to toggle dropdown visibility
-const open = ref(true)
+				if (!eventClassList.contains('backdrop')) {
+					const eventParentClassList =
+						event.target.parentElement.classList
 
-// Method to close the dropdown
-const closeDropdown = (event) => {
-	if (document.documentElement.clientWidth <= 768) {
-		const eventClassList = event.target.classList
+					const containsHamburgerClass =
+						eventClassList.contains('hamburger')
+					const containsBarClass = eventClassList.contains('bar')
+					const parentContainsHamburgerClass =
+						eventParentClassList.contains('hamburger')
 
-		if (!eventClassList.contains('backdrop')) {
-			const eventParentClassList = event.target.parentElement.classList
-
-			const containsHamburgerClass = eventClassList.contains('hamburger')
-			const containsBarClass = eventClassList.contains('bar')
-			const parentContainsHamburgerClass =
-				eventParentClassList.contains('hamburger')
-
-			if (eventClassList !== null) {
-				if (
-					(containsBarClass && parentContainsHamburgerClass) ||
-					containsHamburgerClass
-				) {
-					open.value = true
-				}
-
-				if (!containsHamburgerClass) {
-					if (!containsBarClass && !parentContainsHamburgerClass) {
-						const hamburger = document.querySelector('.hamburger')
-						const navMenu = document.querySelector(
-							'.nav-menu-items-container',
-						)
-
+					if (eventClassList !== null) {
 						if (
-							hamburger.classList.contains('active') &&
-							navMenu.classList.contains('active')
+							(containsBarClass &&
+								parentContainsHamburgerClass) ||
+							containsHamburgerClass
 						) {
-							hamburger.classList.toggle('active')
-							navMenu.classList.toggle('active')
-							open.value = false
+							open.value = true
+						}
+
+						if (!containsHamburgerClass) {
+							if (
+								!containsBarClass &&
+								!parentContainsHamburgerClass
+							) {
+								const hamburger =
+									document.querySelector('.hamburger')
+								const navMenu = document.querySelector(
+									'.nav-menu-items-container',
+								)
+
+								if (
+									hamburger.classList.contains('active') &&
+									navMenu.classList.contains('active')
+								) {
+									hamburger.classList.toggle('active')
+									navMenu.classList.toggle('active')
+									open.value = false
+								}
+							}
 						}
 					}
 				}
 			}
-		}
-	}
+		},
+	},
 }
 </script>
 
