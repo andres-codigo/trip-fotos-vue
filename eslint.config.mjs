@@ -47,7 +47,7 @@ export default [
 			},
 		},
 		rules: {
-			'no-console': 'warn',
+			'no-console': ['error', { allow: ['warn', 'error'] }],
 			'no-debugger': 'warn',
 			'vue/multi-word-component-names': 'off',
 			'prettier/prettier': 'error',
