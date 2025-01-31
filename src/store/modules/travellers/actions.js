@@ -13,22 +13,23 @@ export default {
 	async registerTraveller(context, data) {
 		try {
 			const userId = context.rootGetters.userId
+			const token = context.rootGetters.token
 
-			const imagePromises = await Promise.all(
-				Array.from(data.files, async (image) => {
-					image.status = 'loading'
-					const storage = getStorage()
-					const storageRef = ref(
-						storage,
-						`/images/${userId}/${image.name}`,
-					)
+			const imagePromises = data.files.map(async (image) => {
+				image.status = 'loading'
+				const storage = getStorage()
+				const storageRef = ref(
+					storage,
+					`/images/${userId}/${image.name}`,
+				)
 
-					const metadata = {
-						customMetadata: {
-							userId: userId,
-						},
-					}
+				const metadata = {
+					customMetadata: {
+						userId: userId,
+					},
+				}
 
+				try {
 					const response = await uploadBytes(
 						storageRef,
 						image.file,
@@ -40,8 +41,12 @@ export default {
 						image.status = true
 					}
 					return url
-				}),
-			)
+				} catch {
+					throw new Error(`Failed to upload image: ${image.name}`)
+				}
+			})
+
+			const imageUrls = await Promise.all(imagePromises)
 
 			const travellerData = {
 				firstName: data.first,
@@ -49,60 +54,70 @@ export default {
 				description: data.desc,
 				daysInCity: data.days,
 				areas: data.areas,
-				files: imagePromises,
+				files: imageUrls,
 				registered: new Date(),
 			}
 
-			const token = context.rootGetters.token
-
 			const response = await fetch(
-				APIConstants.BASE_URL +
-					`/travellers/${userId}.json?auth=` +
-					token,
+				`${APIConstants.BASE_URL}/travellers/${userId}.json?auth=${token}`,
 				{
 					method: APIConstants.PUT,
+					headers: {
+						'Content-Type': 'application/json',
+					},
 					body: JSON.stringify(travellerData),
 				},
 			)
 
-			if (response.ok) {
-				context.commit('registerTraveller', {
-					...travellerData,
-					id: userId,
-				})
-			} else {
-				throw new Error(APIErrorMessageConstants.REGISTER_TRAVELLER)
+			if (!response.ok) {
+				throw new Error(
+					`${APIErrorMessageConstants.REGISTER_TRAVELLER}${userId}.`,
+				)
 			}
+
+			context.commit('registerTraveller', {
+				...travellerData,
+				id: userId,
+			})
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(
+				`${APIErrorMessageConstants.REGISTER_TRAVELLER_CATCH}${context.rootGetters.userId}.`,
+			)
 		}
 	},
 
 	async travellerName(context, data) {
 		try {
-			const travellerName = data.first + ' ' + data.last
+			const fullName = data.first + ' ' + data.last
 
 			const response = await fetch(
-				APIConstants.API_URL + 'update?key=' + APIConstants.API_KEY,
+				`${APIConstants.API_URL}update?key=${APIConstants.API_KEY}`,
 				{
 					method: APIConstants.POST,
+					headers: {
+						'Content-Type': 'application/json',
+					},
 					body: JSON.stringify({
 						idToken: context.rootGetters.token,
-						displayName: travellerName,
+						displayName: fullName,
 					}),
 				},
 			)
 
-			if (response.ok) {
-				const updateResponse = await response.json()
+			const updateResponse = await response.json()
 
+			if (response.ok) {
 				localStorage.setItem('userName', updateResponse.displayName)
 				context.commit('setTravellerName', updateResponse.displayName)
 			} else {
-				throw new Error(APIErrorMessageConstants.LOAD_TRAVELLER_NAME)
+				throw new Error(
+					`${APIErrorMessageConstants.UPDATE_TRAVELLER_NAME}${fullName}.`,
+				)
 			}
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(
+				`${APIErrorMessageConstants.UPDATE_TRAVELLER_NAME_CATCH} ${data.first} ${data.last}.`,
+			)
 		}
 	},
 
@@ -111,7 +126,7 @@ export default {
 			const travellerId = data.travellerId
 
 			const response = await fetch(
-				APIConstants.BASE_URL + `/travellers/${travellerId}.json`,
+				`${APIConstants.BASE_URL}/travellers/${travellerId}.json`,
 				{
 					method: APIConstants.GET,
 					headers: {
@@ -120,50 +135,53 @@ export default {
 				},
 			)
 
-			if (response.ok) {
-				const responseData = await response.json()
+			const responseData = await response.json()
 
+			if (response.ok) {
 				context.commit('setTraveller', {
 					...responseData,
 					id: travellerId,
 				})
 			} else {
-				throw new Error(APIErrorMessageConstants.LOAD_TRAVELLER)
+				throw new Error(
+					`${APIErrorMessageConstants.LOAD_TRAVELLER}${travellerId}.`,
+				)
 			}
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(
+				`${APIErrorMessageConstants.LOAD_TRAVELLER_CATCH}${data.travellerId}.`,
+			)
 		}
 	},
 
 	async updateTravellers(context) {
-		const response = await fetch(
-			APIConstants.BASE_URL + '/travellers.json',
-			{
-				method: APIConstants.GET,
-				headers: {
-					'Content-Type': 'application/json',
+		try {
+			const response = await fetch(
+				`${APIConstants.BASE_URL}/travellers.json`,
+				{
+					method: APIConstants.GET,
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				},
-			},
-		)
+			)
 
-		if (response.ok) {
+			if (!response.ok) {
+				throw new Error(APIErrorMessageConstants.UPDATE_TRAVELLERS)
+			}
+
 			const responseData = await response.json()
 
-			const travellers = []
-
-			for (const key in responseData) {
-				const traveller = {
-					id: key,
-					firstName: responseData[key].firstName,
-					lastName: responseData[key].lastName,
-					description: responseData[key].description,
-					daysInCity: responseData[key].daysInCity,
-					areas: responseData[key].areas,
-					files: responseData[key].files,
-					registered: responseData[key].registered,
-				}
-				travellers.push(traveller)
-			}
+			const travellers = Object.keys(responseData).map((key) => ({
+				id: key,
+				firstName: responseData[key].firstName,
+				lastName: responseData[key].lastName,
+				description: responseData[key].description,
+				daysInCity: responseData[key].daysInCity,
+				areas: responseData[key].areas,
+				files: responseData[key].files,
+				registered: responseData[key].registered,
+			}))
 
 			const loggedInTraveller = travellers.find(
 				(traveller) => traveller.id === localStorage.userId,
@@ -173,33 +191,28 @@ export default {
 				(traveller) => traveller.id !== localStorage.userId,
 			)
 
-			if (loggedInTraveller !== undefined) {
+			if (loggedInTraveller) {
 				filteredTraveller.unshift(loggedInTraveller)
 				context.commit(
 					'setTravellerName',
-					loggedInTraveller.firstName +
-						' ' +
-						loggedInTraveller.lastName,
+					`${loggedInTraveller.firstName} ${loggedInTraveller.lastName}`,
 				)
 				context.commit('setTravellers', filteredTraveller)
 			} else {
 				context.commit('setTravellers', travellers)
 			}
-		} else {
-			throw new Error(APIErrorMessageConstants.LOAD_TRAVELLERS)
+		} catch {
+			throw new Error(APIErrorMessageConstants.UPDATE_TRAVELLERS_CATCH)
 		}
 	},
 
 	async deleteTraveller(context, data) {
 		try {
 			const travellerId = data.travellerId
-
 			const token = context.rootGetters.token
 
 			const response = await fetch(
-				APIConstants.BASE_URL +
-					`/travellers/${travellerId}.json?auth=` +
-					token,
+				`${APIConstants.BASE_URL}/travellers/${travellerId}.json?auth=${token}`,
 				{
 					method: APIConstants.DELETE,
 					headers: {
@@ -210,19 +223,21 @@ export default {
 
 			if (response.ok) {
 				if (data.files && data.files.length > 0) {
-					// Delete images in Firebase Storage user as uploaded
+					// Delete images in Firebase Storage
 					await Promise.all(
-						Array.from(data.files, async (image) => {
+						data.files.map(async (image) => {
 							const storage = getStorage()
 							const desertRef = ref(storage, image)
 
 							// Delete the file
-							deleteObject(desertRef).catch((error) => {
+							try {
+								await deleteObject(desertRef)
+							} catch (error) {
+								console.error('Error deleting file:', error)
 								throw new Error(
 									APIErrorMessageConstants.CATCH_MESSAGE,
-									error,
 								)
-							})
+							}
 						}),
 					)
 				}
@@ -232,23 +247,25 @@ export default {
 				})
 
 				await context.dispatch('deleteTravellerMessages', travellerId)
-
 				await context.dispatch('updateTravellers')
 			} else {
-				throw new Error(APIErrorMessageConstants.DELETE_TRAVELLER)
+				throw new Error(
+					`${APIErrorMessageConstants.DELETE_TRAVELLER}${travellerId}.`,
+				)
 			}
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(
+				`${APIErrorMessageConstants.DELETE_TRAVELLER_CATCH}${data.travellerId}.`,
+			)
 		}
 	},
+
 	async deleteTravellerMessages(context, travellerId) {
 		try {
 			const token = context.rootGetters.token
 
 			const response = await fetch(
-				APIConstants.BASE_URL +
-					`/messages/${travellerId}.json?auth=` +
-					token,
+				`${APIConstants.BASE_URL}/messages/${travellerId}.json?auth=${token}`,
 				{
 					method: APIConstants.DELETE,
 					headers: {
@@ -262,12 +279,17 @@ export default {
 					id: travellerId,
 				})
 			} else {
-				throw new Error(APIErrorMessageConstants.DELETE_TRAVELLER)
+				throw new Error(
+					`${APIErrorMessageConstants.DELETE_TRAVELLER_MESSAGES}${travellerId}.`,
+				)
 			}
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(
+				`${APIErrorMessageConstants.DELETE_TRAVELLER_MESSAGES_CATCH}${travellerId}.`,
+			)
 		}
 	},
+
 	async loadTravellers(context, payload) {
 		try {
 			if (!payload.forceRefresh && !context.getters.shouldUpdate) {
@@ -277,7 +299,7 @@ export default {
 			await context.dispatch('updateTravellers')
 			context.commit('setFetchTimestamp')
 		} catch {
-			throw new Error(APIErrorMessageConstants.CATCH_MESSAGE)
+			throw new Error(APIErrorMessageConstants.LOAD_TRAVELLERS_CATCH)
 		}
 	},
 }
