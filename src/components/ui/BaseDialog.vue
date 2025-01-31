@@ -89,7 +89,7 @@ dialog {
 	position: fixed;
 	right: 0;
 	top: 0;
-	width: 80%;
+	width: 50%;
 	z-index: 100;
 
 	header {
@@ -149,6 +149,12 @@ dialog {
 	&.dialog-leave-from {
 		opacity: 1;
 		transform: scale(1);
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	dialog {
+		width: 80%;
 	}
 }
 </style>
