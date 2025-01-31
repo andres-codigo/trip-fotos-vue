@@ -7,7 +7,8 @@
 			@close="handleError">
 			<p>{{ error }}</p>
 		</base-dialog>
-		<base-dialog :show="isLoading" title="Authenticating..." fixed>
+		<base-dialog :show="isLoading" title="Authenticating" fixed>
+			<p>Authenticating your details, one moment please...</p>
 			<base-spinner></base-spinner>
 		</base-dialog>
 		<base-card>

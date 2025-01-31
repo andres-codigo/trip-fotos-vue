@@ -4,12 +4,14 @@
 		:title="title + `'s photos`"
 		:section-classes="addImageClasses"
 		@close="toggleDialog">
-		<img :src="url" />
+		<img v-lazy="url" />
+		<!-- TODO: temporary enabled v-lazy load component to test performance once deployed to vercel; will reverse is performance slow -->
+		<!-- <img :src="url" /> -->
 	</base-dialog>
 	<li class="image-preview" @click="toggleDialog">
-		<!-- TODO: temporary removal of v-lazy load component as need to refine its usage -->
-		<!-- <img v-lazy="url" /> -->
-		<img :src="url" />
+		<img v-lazy="url" />
+		<!-- TODO: temporary enabled v-lazy load component to test performance once deployed to vercel; will reverse is performance slow -->
+		<!-- <img :src="url" /> -->
 	</li>
 </template>
 

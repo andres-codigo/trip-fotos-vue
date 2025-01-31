@@ -7,14 +7,19 @@
 			@close="handleError">
 			<p>{{ error }}</p>
 		</base-dialog>
+		<base-dialog
+			:show="registeringUser"
+			title="Completing registration"
+			fixed>
+			<p>
+				Registering you as a traveller<span v-if="fullName"
+					>, {{ fullName }}</span
+				>, one moment please...
+			</p>
+			<base-spinner></base-spinner>
+		</base-dialog>
 		<base-card>
-			<h2 v-if="registeringUser">
-				Registering you as a traveller, one moment please...
-			</h2>
-			<div v-if="isLoading" class="spinner-container">
-				<base-spinner></base-spinner>
-			</div>
-			<div v-else>
+			<div>
 				<h2>Register as a traveller now!</h2>
 				<traveller-form
 					@register-traveller="registerTraveller"></traveller-form>
@@ -36,17 +41,15 @@ export default {
 	data() {
 		return {
 			dialogTitle: GlobalConstants.ERROR_DIALOG_TITLE,
-			isLoading: false,
 			registeringUser: false,
+			fullName: '',
 			error: null,
 		}
 	},
 	methods: {
 		async registerTraveller(data) {
-			if (Array.isArray(data.files) && data.files.length === 0) {
-				this.registeringUser = true
-				this.isLoading = true
-			}
+			this.fullName = data.first + ' ' + data.last
+			this.registeringUser = true
 
 			const registerTraveller = Promise.resolve(
 				this.$store.dispatch('travellers/registerTraveller', data),
@@ -68,6 +71,9 @@ export default {
 				.catch((error) => {
 					this.error =
 						error.message || StoreMessagesConstants.GENERIC_MESSAGE
+				})
+				.finally(() => {
+					this.registeringUser = false
 				})
 		},
 		handleError() {

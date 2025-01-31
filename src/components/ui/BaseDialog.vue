@@ -81,13 +81,14 @@ dialog {
 	background-color: variables.$color-white;
 	border: none;
 	border-radius: 12px;
+	bottom: 0;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-	left: 10%;
-	margin: 0;
+	left: 0;
 	overflow: hidden;
 	padding: 0;
 	position: fixed;
-	top: 7vh;
+	right: 0;
+	top: 0;
 	width: 80%;
 	z-index: 100;
 
@@ -111,6 +112,9 @@ dialog {
 		}
 		&.general-section {
 			padding: 1rem;
+			:slotted(p) {
+				text-align: center;
+			}
 		}
 		:slotted(img) {
 			display: block;
@@ -145,13 +149,6 @@ dialog {
 	&.dialog-leave-from {
 		opacity: 1;
 		transform: scale(1);
-	}
-}
-
-@media only screen and (min-width: 768px) {
-	dialog {
-		left: calc(50% - 20rem);
-		width: 40rem;
 	}
 }
 </style>
