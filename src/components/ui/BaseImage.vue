@@ -4,7 +4,7 @@
 		:title="title + `'s photos`"
 		:section-classes="addImageClasses"
 		@close="toggleDialog">
-		<img v-lazy="url" />
+		<img v-lazy="url" :class="imageOrientation" @load="onImageLoad" />
 		<!-- TODO: temporary enabled v-lazy load component to test performance once deployed to vercel; will reverse is performance slow -->
 		<!-- <img :src="url" /> -->
 	</base-dialog>
@@ -31,9 +31,20 @@ export default {
 		return {
 			show: false,
 			addImageClasses: true,
+			imageOrientation: '',
 		}
 	},
 	methods: {
+		onImageLoad(event) {
+			const img = event.target
+			if (img.width > img.height) {
+				this.imageOrientation = 'landscape'
+			} else if (img.width < img.height) {
+				this.imageOrientation = 'portrait'
+			} else {
+				this.imageOrientation = 'square'
+			}
+		},
 		toggleDialog() {
 			this.show = !this.show
 		},
@@ -73,29 +84,44 @@ export default {
 	}
 }
 
-// Min/max media queries
-@include mixins.media-query-max-width-image-resizing(357px, 160px);
+@media only screen and (max-height: 430px) {
+	.image-section {
+		img {
+			padding: 0;
+			&.portrait {
+				width: 120px;
+			}
+			&.landscape {
+				height: 180px;
+			}
+		}
+	}
+}
 
-@include mixins.media-query-min-max-width-image-resizing(358px, 666px, 260px);
-
-@include mixins.media-query-min-width-image-resizing(667px, 300px);
-
-@include mixins.media-query-min-max-width-image-resizing(960px, 2000px, 400px);
-
-// Device orientated min/max media queries
-@include mixins.media-query-max-device-width-image-resizing(480px, 260px);
-
-@include mixins.media-query-ipad-orientation-min-max-device-width-image-resizing(
-	481px,
-	1024px,
-	portrait,
-	500px
+// min/max width media resizing
+@include mixins.dialog-min-max-width-image-resizing(
+	0px,
+	410px,
+	250px,
+	'portrait'
+);
+@include mixins.dialog-min-max-width-image-resizing(
+	411px,
+	667px,
+	300px,
+	'portrait'
+);
+@include mixins.dialog-min-max-width-image-resizing(
+	668px,
+	2000px,
+	350px,
+	'portrait'
 );
 
-@include mixins.media-query-ipad-orientation-min-max-device-width-image-resizing(
-	481px,
-	1024px,
-	landscape,
-	400px
+@include mixins.dialog-min-max-width-image-resizing(
+	0px,
+	2048px,
+	90%,
+	'landscape'
 );
 </style>

@@ -68,57 +68,27 @@ $prefixes: '-moz-', '-webkit-', '-o-', '-ms-', '';
 // ********************
 // START dialog image resizing media queries
 // ********************
-@mixin section-image-dom($width) {
-	.image-section {
-		img {
-			max-width: $width;
+@mixin media-query-portrait-landscape($query, $max-image-width, $orientation) {
+	@media only screen and #{$query} {
+		.image-section {
+			img {
+				@if $orientation == 'portrait' {
+					&.portrait {
+							 max-width: $max-image-width;
+						}
+				} @else if $orientation == 'landscape' {
+					&.landscape {
+							max-width: $max-image-width;
+						}
+				}
+			}
 		}
 	}
 }
 
-// Media query mixins
-@mixin media-query($query, $max-image-width) {
-	@media only screen and #{$query} {
-		@include section-image-dom($max-image-width);
-	}
-}
-
-@mixin media-query-min-width-image-resizing($min-width, $max-image-width) {
-	@include media-query('(min-width: #{$min-width})', $max-image-width);
-}
-
-@mixin media-query-max-width-image-resizing($max-width, $max-image-width) {
-	@include media-query('(max-width: #{$max-width})', $max-image-width);
-}
-
-@mixin media-query-min-max-width-image-resizing(
-	$min-width,
-	$max-width,
-	$max-image-width
-) {
-	@include media-query(
-		'(min-width: #{$min-width}) and (max-width: #{$max-width})',
-		$max-image-width
-	);
-}
-
-@mixin media-query-max-device-width-image-resizing(
-	$max-width,
-	$max-image-width
-) {
-	@include media-query('(max-device-width: #{$max-width})', $max-image-width);
-}
-
-@mixin media-query-ipad-orientation-min-max-device-width-image-resizing(
-	$min-device-width,
-	$max-device-width,
-	$orientation,
-	$max-image-width
-) {
-	@include media-query(
-		'(min-device-width: #{$min-device-width}) and (max-device-width: #{$max-device-width}) and (orientation: #{$orientation})',
-		$max-image-width
-	);
+// min/max width media resizing
+@mixin dialog-min-max-width-image-resizing($min-width, $max-width, $max-image-width, $orientation) {
+	@include media-query-portrait-landscape('(min-width: #{$min-width}) and (max-width: #{$max-width})', $max-image-width, $orientation);
 }
 // ********************
 // END dialog image resizing media queries

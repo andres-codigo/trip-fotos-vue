@@ -89,7 +89,7 @@ dialog {
 	position: fixed;
 	right: 0;
 	top: 0;
-	width: 50%;
+	width: 80%;
 	z-index: 100;
 
 	header {
@@ -107,7 +107,6 @@ dialog {
 		&.image-section {
 			align-items: center;
 			display: flex;
-			min-height: 396px;
 			padding: 2.5rem 0 1rem 0;
 		}
 		&.general-section {
