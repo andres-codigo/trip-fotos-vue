@@ -156,4 +156,10 @@ dialog {
 		width: 80%;
 	}
 }
+
+@media only screen and (min-width: 768px) {
+	dialog {
+		width: 50%;
+	}
+}
 </style>

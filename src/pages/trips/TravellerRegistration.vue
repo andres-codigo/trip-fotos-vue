@@ -14,7 +14,8 @@
 			<p>
 				Registering you as a traveller<span v-if="fullName"
 					>, {{ fullName }}</span
-				>, one moment please...
+				>, one moment please as we review and compress your newly
+				images.
 			</p>
 			<base-spinner></base-spinner>
 		</base-dialog>

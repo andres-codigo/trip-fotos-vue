@@ -6,7 +6,7 @@
 		<img :src="file.url" :alt="file.file.name" :title="file.file.name" />
 
 		<span
-			v-show="file.status == 'loading'"
+			v-show="file.status == GlobalConstants.LOADING_IMAGE"
 			class="status-indicator loading-indicator"
 			>In Progress</span
 		>
@@ -24,6 +24,8 @@
 </template>
 
 <script setup>
+import { GlobalConstants } from '../../constants/global'
+
 defineProps({
 	file: { type: Object, required: true },
 	tag: { type: String, default: 'li' },
@@ -87,7 +89,7 @@ defineEmits(['remove'])
 
 	.success-indicator {
 		background: variables.$color-mantis;
-		color: variables.$color-japanese-laurel;
+		color: variables.$color-black;
 	}
 
 	.failure-indicator {

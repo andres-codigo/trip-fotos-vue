@@ -1,12 +1,14 @@
+import imageCompression from 'browser-image-compression'
 import {
 	getStorage,
 	getDownloadURL,
 	ref,
-	uploadBytes,
+	uploadBytesResumable,
 	deleteObject,
 } from 'firebase/storage'
 
 import { APIConstants } from '../../../constants/api'
+import { GlobalConstants } from '../../../constants/global'
 import { APIErrorMessageConstants } from '../../../constants/api-messages'
 
 export default {
@@ -15,8 +17,12 @@ export default {
 			const userId = context.rootGetters.userId
 			const token = context.rootGetters.token
 
-			const imagePromises = data.files.map(async (image) => {
-				image.status = 'loading'
+			const MAX_CONCURRENT_UPLOADS = 5
+			const imageQueue = [...data.files]
+			const imageUrls = []
+
+			const uploadImage = async (image) => {
+				image.status = GlobalConstants.LOADING_IMAGE
 				const storage = getStorage()
 				const storageRef = ref(
 					storage,
@@ -29,24 +35,51 @@ export default {
 					},
 				}
 
-				try {
-					const response = await uploadBytes(
-						storageRef,
-						image.file,
-						metadata,
+				// Compress the image
+				const compressedFile = await imageCompression(image.file, {
+					maxSizeMB: 1,
+					maxWidthOrHeight: 1920,
+					useWebWorker: true,
+				})
+
+				const uploadTask = uploadBytesResumable(
+					storageRef,
+					compressedFile,
+					metadata,
+				)
+
+				return new Promise((resolve, reject) => {
+					uploadTask.on(
+						'state_changed',
+						null,
+						() => {
+							reject(
+								new Error(
+									`Failed to upload image: ${image.name}`,
+								),
+							)
+						},
+						async () => {
+							const url = await getDownloadURL(
+								uploadTask.snapshot.ref,
+							)
+							image.status = true
+							resolve(url)
+						},
 					)
-					const url = await getDownloadURL(response.ref)
+				})
+			}
 
-					if (response.ref) {
-						image.status = true
-					}
-					return url
-				} catch {
-					throw new Error(`Failed to upload image: ${image.name}`)
-				}
-			})
+			const uploadNextBatch = async () => {
+				const batch = imageQueue.splice(0, MAX_CONCURRENT_UPLOADS)
+				const batchPromises = batch.map(uploadImage)
+				const batchResults = await Promise.all(batchPromises)
+				imageUrls.push(...batchResults)
+			}
 
-			const imageUrls = await Promise.all(imagePromises)
+			while (imageQueue.length > 0) {
+				await uploadNextBatch()
+			}
 
 			const travellerData = {
 				firstName: data.first,
