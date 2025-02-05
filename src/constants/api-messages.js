@@ -1,7 +1,9 @@
 export const APIErrorMessageConstants = Object.freeze({
 	// GENERAL
 	GENERIC_MESSAGE: 'Something went wrong!',
-	CATCH_MESSAGE: 'There has been a problem with your fetch operation.',
+	CATCH_MESSAGE: 'A problem was encountered with the fetch operation.',
+	RESPONSE_MESSAGE: 'Request failed with status: ',
+	INVALID_PAYLOAD: 'Invalid payload.',
 
 	// AUTHENTICATION
 	LOGIN_TYPE_EMAIL_EXISTS: 'EMAIL_EXISTS',
@@ -16,12 +18,26 @@ export const APIErrorMessageConstants = Object.freeze({
 	FAILED_TO_AUTHENTICATE:
 		'Failed to authenticate. Check your login credentials.',
 
-	// TRAVELLERS
-	REGISTER_TRAVELLER: 'Failed to register traveller.',
-	LOAD_TRAVELLER_NAME: 'Failed to load traveller name.',
-	LOAD_TRAVELLER: 'Failed to register traveller.',
-	DELETE_TRAVELLER: 'Failed to delete traveller.',
+	// TRAVELLERS ACTIONS ERROR MESSAGES
+	REGISTER_TRAVELLER: 'Failed to register traveller with ID',
+	REGISTER_TRAVELLER_CATCH:
+		' error occurred while registering traveller with ID ',
+	UPDATE_TRAVELLER_NAME: 'Failed to update traveller ',
+	UPDATE_TRAVELLER_NAME_CATCH: 'An error occurred while updating traveller ',
+	LOAD_TRAVELLER: 'Failed to load traveller with ID ',
+	LOAD_TRAVELLER_CATCH:
+		'An error occurred while loading the traveller with ID ',
+	UPDATE_TRAVELLERS: 'Failed to fetch travellers data.',
+	UPDATE_TRAVELLERS_CATCH: 'An error occurred while updating the travellers.',
+	DELETE_TRAVELLER: 'Failed to delete traveller with ID ',
+	DELETE_TRAVELLER_CATCH:
+		'An error occurred while deleting traveller with ID ',
+	DELETE_TRAVELLER_MESSAGES:
+		'Failed to delete messages for traveller with ID ',
+	DELETE_TRAVELLER_MESSAGES_CATCH:
+		'An error occurred while deleting messages for traveller with ID ',
 	LOAD_TRAVELLERS: 'Failed to load travellers.',
+	LOAD_TRAVELLERS_CATCH: 'An error occurred while loading the travellers.',
 
 	// MESSAGES
 	FETCH_MESSAGES: 'Failed to fetch messages.',

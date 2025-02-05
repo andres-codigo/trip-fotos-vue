@@ -36,8 +36,6 @@
 </template>
 
 <script setup>
-import { defineExpose } from 'vue'
-
 // Components
 import DropZone from './DropZone.vue'
 import FilePreview from './FilePreview.vue'

@@ -15,19 +15,26 @@ const MessagesReceived = () => import('@/pages/messages/MessagesReceived.vue')
 
 const UserAuth = () => import('@/pages/auth/UserAuth.vue')
 
-const NotFound = () => import('@/pages/NotFound.vue')
+const PageNotFound = () => import('@/pages/PageNotFound.vue')
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		{ path: '/', redirect: '/trips', meta: { requiresAuth: true } },
+		{
+			path: '/',
+			redirect: '/trips',
+			name: 'trips-root',
+			meta: { requiresAuth: true },
+		},
 		{
 			path: '/trips',
+			name: 'trips-list',
 			component: TripsList,
 			meta: { requiresAuth: true },
 		},
 		{
 			path: '/trips/:id',
+			name: 'traveller-detail',
 			component: TravellerDetail,
 			props: true,
 			meta: { requiresAuth: true },
@@ -42,16 +49,27 @@ const router = createRouter({
 		},
 		{
 			path: '/register',
+			name: 'register',
 			component: TravellerRegistration,
 			meta: { requiresAuth: true },
 		},
 		{
 			path: '/messages',
+			name: 'messages',
 			component: MessagesReceived,
 			meta: { requiresAuth: true },
 		},
-		{ path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
-		{ path: '/:notFound(.*)', component: NotFound }, // catch all/invalid url
+		{
+			path: '/auth',
+			name: 'auth',
+			component: UserAuth,
+			meta: { requiresUnauth: true },
+		},
+		{
+			path: '/:notFound(.*)',
+			name: 'page-not-found',
+			component: PageNotFound,
+		}, // catch all/invalid url
 	],
 })
 

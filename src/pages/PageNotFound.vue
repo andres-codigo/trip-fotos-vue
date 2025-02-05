@@ -4,8 +4,8 @@
 			<h2>The page could not be found</h2>
 			<p>
 				This page could not be found. Click the
-				<router-link to="/">trips</router-link> to return to the home
-				page.
+				<router-link :to="{ name: 'trips-root' }">trips</router-link> to
+				return to the home page.
 			</p>
 		</base-card>
 	</section>

@@ -110,13 +110,16 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 		logInUser(user.email, user.password)
 
 		cy.window().then((window) => {
-			// Get the messages count from the window store
-			let messagesCount = window.$store.getters['messages/messagesCount']
+			cy.on('before-update-hook-complete', () => {
+				// Get the messages count from the window store
+				let messagesCount =
+					window.$store.getters['messages/messagesCount']
 
-			// Assert that the total messages element exists, has the right class, and displays the correct count
-			cy.get(topNavigationSelectors.totalMessages)
-				.should('have.class', 'total-messages')
-				.and('contain.text', messagesCount.toString())
+				// Assert that the total messages element exists, has the right class, and displays the correct count
+				cy.get(topNavigationSelectors.totalMessages)
+					.should('have.class', 'total-messages')
+					.and('contain.text', messagesCount.toString())
+			})
 		})
 	})
 })
