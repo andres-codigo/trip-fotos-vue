@@ -40,8 +40,8 @@
 		"eslint-plugin-vue": "^9.32.0",
 		"globals": "^15.15.0",
 		"prettier": "^3.5.1",
-		"sass-embedded": "^1.83.4",
-		"sass-loader": "^16.0.2",
+		"sass-embedded": "^1.85.0",
+		"sass-loader": "^16.0.4",
 		"vite": "^6.1.0",
 		"vite-plugin-eslint": "^1.8.1",
 		"vue-eslint-parser": "^9.4.3"
