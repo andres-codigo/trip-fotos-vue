@@ -74,12 +74,12 @@ $prefixes: '-moz-', '-webkit-', '-o-', '-ms-', '';
 			img {
 				@if $orientation == 'portrait' {
 					&.portrait {
-							 max-width: $max-image-width;
-						}
+						max-width: $max-image-width;
+					}
 				} @else if $orientation == 'landscape' {
 					&.landscape {
-							max-width: $max-image-width;
-						}
+						max-width: $max-image-width;
+					}
 				}
 			}
 		}
@@ -87,8 +87,17 @@ $prefixes: '-moz-', '-webkit-', '-o-', '-ms-', '';
 }
 
 // min/max width media resizing
-@mixin dialog-min-max-width-image-resizing($min-width, $max-width, $max-image-width, $orientation) {
-	@include media-query-portrait-landscape('(min-width: #{$min-width}) and (max-width: #{$max-width})', $max-image-width, $orientation);
+@mixin dialog-min-max-width-image-resizing(
+	$min-width,
+	$max-width,
+	$max-image-width,
+	$orientation
+) {
+	@include media-query-portrait-landscape(
+		'(min-width: #{$min-width}) and (max-width: #{$max-width})',
+		$max-image-width,
+		$orientation
+	);
 }
 // ********************
 // END dialog image resizing media queries
