@@ -2,15 +2,15 @@
 
 ## Contents
 
--   [About This Project](#about-this-project)
--   [Stack](#stack)
--   [Installation](#installation)
--   [Setup](#setup)
--   [Development](#development)
--   [Testing](#testing)
--   [Build](#build)
--   [Deployment](#deployment)
--   [Features](#features)
+- [About This Project](#about-this-project)
+- [Stack](#stack)
+- [Installation](#installation)
+- [Setup](#setup)
+- [Development](#development)
+- [Testing](#testing)
+- [Build](#build)
+- [Deployment](#deployment)
+- [Features](#features)
 
 ## About this project
 
@@ -22,17 +22,17 @@ Tailored to be developed using Visual Studio Code.
 
 ## Stack
 
--   [Vite](https://vite.dev/) for development and build.
--   [Vue 3](https://vuejs.org/) as Front-End Library.
--   [Vue Router](https://router.vuejs.org/) for Vue.js routing.
--   [Vuex](https://vuex.vuejs.org/) for State Management.
--   [SASS](https://sass-lang.com/) for CSS preprocessing
--   [ESLint](https://eslint.org/) for JavaScript linting
--   [Prettier](https://prettier.io/) for code formatting
--   [Cypress](https://www.cypress.io/) for frontend test automation
--   [Firebase Realtime Database](https://firebase.google.com/docs/database) for storing Travellers and Messages.
--   [Firebase Authentication](https://firebase.google.com/docs/auth) for storing Sign-in credentials.
--   [Firebase Cloud Storage](https://firebase.google.com/docs/storage) for storing uploaded traveller images.
+- [Vite](https://vite.dev/) for development and build.
+- [Vue 3](https://vuejs.org/) as Front-End Library.
+- [Vue Router](https://router.vuejs.org/) for Vue.js routing.
+- [Vuex](https://vuex.vuejs.org/) for State Management.
+- [SASS](https://sass-lang.com/) for CSS preprocessing
+- [ESLint](https://eslint.org/) for JavaScript linting
+- [Prettier](https://prettier.io/) for code formatting
+- [Cypress](https://www.cypress.io/) for frontend test automation
+- [Firebase Realtime Database](https://firebase.google.com/docs/database) for storing Travellers and Messages.
+- [Firebase Authentication](https://firebase.google.com/docs/auth) for storing Sign-in credentials.
+- [Firebase Cloud Storage](https://firebase.google.com/docs/storage) for storing uploaded traveller images.
 
 ## Installation
 
@@ -161,8 +161,8 @@ Project deployment workflow can be viewed and configured via GitHub > Integratio
 
 NB: The trip-fotos App requires registered login credentials for full access. To enable a user to 'Sign-up' and then register as a traveller within the app uncomment the 'switch mode' button (src/pages/auth/UserAuth.vue), lines 38-43.
 
--   When registering travellers can optionally upload photos against their profile for others to view.
+- When registering travellers can optionally upload photos against their profile for others to view.
 
--   Registered travellers can leave personal 'messages', as opposed to 'requests', on other traveller profiles
+- Registered travellers can leave personal 'messages', as opposed to 'requests', on other traveller profiles
 
--   An admin user of your choice will be able to log in and delete other registered travellers
+- An admin user of your choice will be able to log in and delete other registered travellers

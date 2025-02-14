@@ -1,19 +1,19 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import eslintPlugin from 'vite-plugin-eslint'
+import eslintPlugin from 'vite-plugin-eslint2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	server: {
-		port: 3000,
-		open: true,
-	},
-	preview: {
-		port: 3001,
-		open: true,
-	},
-	plugins: [vue(), eslintPlugin()],
+	server: { port: 4000, open: true },
+	preview: { port: 4001, open: true },
+	plugins: [
+		vue(),
+		eslintPlugin({
+			include: ['src/**/*.js', 'src/**/*.vue'],
+			exclude: ['node_modules', 'dist'],
+		}),
+	],
 	css: {
 		preprocessorOptions: {
 			scss: {
