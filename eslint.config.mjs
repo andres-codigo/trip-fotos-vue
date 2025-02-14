@@ -28,7 +28,7 @@ export default [
 	...compat.env({ es2020: true, node: true }),
 	{
 		//---- GLOBAL IGNORES
-		ignores: ['**/dist/', '*.config.js'],
+		ignores: ['**/dist/', '**/node_modules/', '**/public/', '**/build/'],
 	},
 	// general
 	{

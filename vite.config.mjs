@@ -7,7 +7,13 @@ import eslintPlugin from 'vite-plugin-eslint2'
 export default defineConfig({
 	server: { port: 4000, open: true },
 	preview: { port: 4001, open: true },
-	plugins: [vue(), eslintPlugin()],
+	plugins: [
+		vue(),
+		eslintPlugin({
+			include: ['src/**/*.js', 'src/**/*.vue'],
+			exclude: ['node_modules', 'dist'],
+		}),
+	],
 	css: {
 		preprocessorOptions: {
 			scss: {

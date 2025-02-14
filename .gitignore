@@ -1,32 +1,30 @@
-# logs
-logs
+# LOGS
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# os files
-.DS_Store
-
-# dependency directories
-# build and set-up files
+# NODE MODULES AND BUILD DIRECTORIES
 node_modules
 dist
 
-# testing
-cypress/downloads/
-
-# Editor directories and files
+# EDITOR DIRECTORIES
 .vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
 
-# optional npm cache directory
+# NPM
 .npm
 
-# optional eslint cache
-.eslintcache
-
-# dotenv environment variable files
+# ENVIRONMENT
 .env
 .env.test
 *.local
+
+# TESTING
+cypress/downloads/
+
+# LINTING
+.eslintcache
+
+# VITE
+.vite
