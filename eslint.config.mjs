@@ -25,17 +25,14 @@ export default [
 		'plugin:vue/vue3-recommended',
 		'plugin:prettier/recommended',
 	),
-	...compat.env({
-		es2020: true,
-		node: true,
-	}),
+	...compat.env({ es2020: true, node: true }),
 	{
 		//---- GLOBAL IGNORES
 		ignores: ['**/dist/', '*.config.js'],
 	},
 	// general
 	{
-		files: ['**/*.{js,ts,jsx,tsx,vue}'],
+		files: ['**/*.{js,vue}'],
 		languageOptions: {
 			ecmaVersion: 2022,
 			sourceType: 'module',
@@ -74,17 +71,12 @@ export default [
 	},
 	// cypress
 	{
-		plugins: {
-			pluginCypress,
-		},
+		plugins: { pluginCypress },
 		files: ['**/*.spec.cy.js'],
 		ignores: ['cypress.config.js'],
 		languageOptions: {
 			sourceType: 'module',
-			globals: {
-				...globals.node,
-				...globals.amd,
-			},
+			globals: { ...globals.node, ...globals.amd },
 		},
 		rules: {
 			// https://github.com/cypress-io/eslint-plugin-cypress

@@ -5,13 +5,14 @@
 	"description": "Extension of Udemy's Vue - The Complete Guide (incl. Router & Composition API) 'Find a coach' project.",
 	"type": "module",
 	"scripts": {
-		"dev": "vite serve",
+		"dev": "npm run lint:js && vite",
 		"build": "vite build",
 		"serve": "vite preview",
 		"cy:open": "cypress open",
-		"lint:js": "eslint src",
-		"lint:fix": "eslint --fix src",
-		"format": "prettier .  --write"
+		"lint:js": "eslint src --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0",
+	    "lint:fix": "eslint src --fix --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0 && prettier --write 'src/**/*.{js,vue,css,scss,json,md}'",
+    	"lint:watch": "chokidar 'src/**/*.{js,vue}' -c 'eslint src --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0'",
+		"format": "prettier --write 'src/**/*.{js,vue,css,scss,json,md}'"
 	},
 	"dependencies": {
 		"@vercel/analytics": "^1.5.0",
