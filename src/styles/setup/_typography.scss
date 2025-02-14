@@ -3,9 +3,10 @@
 	font-family: 'Roboto';
 	font-weight: 400;
 	font-style: normal;
-	font-display: auto;
+	font-display: swap;
 	unicode-range: U+000-5FF;
 	src:
 		local('Roboto'),
+		url('@/assets/fonts/Roboto-Regular.woff') format('woff'),
 		url('@/assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
