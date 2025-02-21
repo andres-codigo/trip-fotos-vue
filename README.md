@@ -1,4 +1,4 @@
-# trip-fotos
+# trip-fotos-vue
 
 ## Contents
 
@@ -17,8 +17,6 @@
 This project is a UI and functional extension on Udemy's Vue - The Complete Guide (incl. Router & Composition API) > 'Find a coach' project.
 
 If has been converted from "finding a coach" to "finding popular travel destinations" tied to a registered traveller.
-
-Tailored to be developed using Visual Studio Code.
 
 ## Stack
 
@@ -45,8 +43,8 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 ### Clone the repository
 
 ```bash
-git clone https://github.com/andres-codigo/trip-fotos
-cd trip-fotos
+git clone https://github.com/andres-codigo/trip-fotos-vue
+cd trip-fotos-vue
 ```
 
 ### Install dependencies
@@ -57,32 +55,76 @@ After cloning the repository, install the dependencies by running:
 npm install
 ```
 
-This will install all the required packages defined in the package.json file.
+This will install all the required package dependencies defined in the package.json file.
 
 ## Setup
+
+### Firebase
+
+#### A pre-requisite of having a Google Account is required, and a [Blaze Plan](https://firebase.google.com/pricing?hl=en) necessary for Database and the Storing of images.
+
+Sign-in to your [Firebase](https://firebase.google.com) account and go to your [Firebase console](https://console.firebase.google.com) to create a [your-project-name] Firebase project.
+
+Once the project is set-up the following build products are required in order to run the App. These products are located inside the project, on the left hand side, under the "Product Categories > Build" dropdown menu:
+
+1.  <u>**Realtime Database:**</u>
+
+- **United States (us-central1, us-east1, or us-west1)** Realtime Database location is required for "No-cost up 'X' GB-months" tier prior to [Cloud Store pricing](https://cloud.google.com/storage/pricing?authuser=0#regions) kicking in, as the [Blaze Pricing Plan](https://firebase.google.com/pricing?hl=en) is now required for use of the Firebase products.
+- The Realtime Database url is required for the **.env > VITE_BACKEND_BASE_URL** key/value (see [Needed Files](#needed-files) below)
+
+    Once set-up select the Rules tab and update as follows:
+
+    ```json
+    {
+    	"rules": {
+    		"travellers": {
+    			".read": true,
+    			".write": "auth != null"
+    		},
+    		"messages": {
+    			".read": "auth != null",
+    			".write": true
+    		}
+    	}
+    }
+    ```
+
+2.  <u>**Authentication:**</u>
+
+- Sign-in Method > Native providers > Email/Password (enabled), and Email link (passwordless sign-in) NOT enabled
+
+3.  <u>**Storage:**</u>
+
+- Set-up a [Blaze Plan](https://firebase.google.com/pricing?hl=en) account to enable storage capabilities
+
+4. <u>**Add Firebase to your web app**</u>
+
+- Register the app
+- Select Firebase SDK using npm **(npm firebase install is not required as already added to package.json)**
 
 ### Needed Files
 
 #### `.env`
 
-Go to your [Firebase Project](https://console.firebase.google.com), ensuring the Firebase App is set-up. Locate your config details, then create a `.env` file adding your project values against the following structure:
+Locate your config details located under the **\*Project > Project settings > General** tab, create a `.env` file and add the applicable project values against the following key/value pairs:
 
 ```bash
 
 # FIREBASE AUTH REST API
-VITE_API_URL=''
-VITE_API_KEY=''
+VITE_API_URL='https://identitytoolkit.googleapis.com/v1/accounts:'
+VITE_API_KEY='' # firebaseConfig > apiKey (delete comment after value added)
 
-VITE_BACKEND_BASE_URL=''
+VITE_BACKEND_BASE_URL='' # firebaseConfig > databaseURL (delete comment after value added)
 
 # FIREBASE APP CONFIGURATION FOR SDK USAGE
-VITE_FIREBASE_API_KEY=""
-VITE_FIREBASE_AUTH_DOMAIN=""
-VITE_DATABASE_URL=""
-VITE_FIREBASE_PROJECT_ID=""
-VITE_FIREBASE_STORAGE_BUCKET=""
-VITE_FIREBASE_MESSAGING_SENDER_ID=""
-VITE_FIREBASE_APP_ID=""
+VITE_FIREBASE_API_KEY="" # firebaseConfig > apiKey (delete comment after value added)
+VITE_FIREBASE_AUTH_DOMAIN="" # firebaseConfig > authDomain (delete comment after value added)
+VITE_DATABASE_URL=$VITE_BACKEND_BASE_URL
+VITE_FIREBASE_PROJECT_ID="" # firebaseConfig > projectId (delete comment after value added)
+VITE_FIREBASE_STORAGE_BUCKET="" # firebaseConfig > storageBucket (delete comment after value added)
+VITE_FIREBASE_MESSAGING_SENDER_ID="" # firebaseConfig > messagingSenderId (delete comment after value added)
+VITE_FIREBASE_APP_ID="" # firebaseConfig > appId (delete comment after value added)
+VITE_FIREBASE_MEASUREMENT_ID="" # firebaseConfig > measurementId (delete comment after value added)
 
 # UNIQUE ID FOR 'EMAIL/PASSWORD' REGISTERED FIREBASE AUTHENTICATED USER THAT WILL HAVE ADMIN RIGHTS ON APP, ALLOWING FOR THE DELETION OF TRAVELLERS FROM THE UI FRONT END, EXCLUDING ADMIN USER
 VITE_ADMIN_ID=''
@@ -92,6 +134,8 @@ CYPRESS_USER_EMAIL=''
 CYPRESS_USER_PASSWORD=''
 
 ```
+
+[Features](#features) section below outlines steps on how to obtain the VITE_ADMIN_ID.
 
 #### `.firebaserc`
 
@@ -159,10 +203,10 @@ Project deployment workflow can be viewed and configured via GitHub > Integratio
 
 ## Features
 
-NB: The trip-fotos App requires registered login credentials for full access. To enable a user to 'Sign-up' and then register as a traveller within the app uncomment the 'switch mode' button (src/pages/auth/UserAuth.vue), lines 38-43.
+NB: The trip-fotos-vue App requires registered login credentials for full access. By default, a user is only able to login.
+
+To enable a user to 'Sign-up' and then register as a traveller uncomment the 'switch mode' button (src/pages/auth/UserAuth.vue), lines 38-43. Once a users have been signed-up, validate the entries in Firebase > Authentication > Users, and copy and paste the **User UID** of your choice into the .env **VITE_ADMIN_ID** property for user Admin access, allowing this user to delete registered travellers using the Front End UI. Deleting the traveller will delete all traveller information, including images, but their authenticated sign-up details will remain.
 
 - When registering travellers can optionally upload photos against their profile for others to view.
 
 - Registered travellers can leave personal 'messages', as opposed to 'requests', on other traveller profiles
-
-- An admin user of your choice will be able to log in and delete other registered travellers
