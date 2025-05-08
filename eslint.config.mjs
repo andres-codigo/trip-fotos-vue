@@ -20,11 +20,7 @@ const gitignorePath = path.resolve(__dirname, '.gitignore')
 export default [
 	pluginCypress.configs.globals,
 	includeIgnoreFile(gitignorePath),
-	...compat.extends(
-		'eslint:recommended',
-		'plugin:vue/vue3-recommended',
-		'plugin:prettier/recommended',
-	),
+	...compat.extends('eslint:recommended', 'plugin:prettier/recommended'),
 	...compat.env({ es2020: true, node: true }),
 	{
 		//---- GLOBAL IGNORES
@@ -52,7 +48,7 @@ export default [
 		},
 	},
 	// vue defaults
-	...pluginVue.configs['flat/essential'],
+	...pluginVue.configs['flat/recommended'],
 	// vue
 	{
 		files: ['**/*.vue'],
