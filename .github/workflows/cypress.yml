@@ -33,6 +33,8 @@ jobs:
             - name: Start app & run Cypress tests
               uses: cypress-io/github-action@v6
               env:
+                  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+                  VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
                   VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
                   CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
                   CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
