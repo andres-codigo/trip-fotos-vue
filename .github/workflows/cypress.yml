@@ -32,8 +32,12 @@ jobs:
 
             - name: Start app & run Cypress tests
               uses: cypress-io/github-action@v6
+              env:
+                  VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
+                  CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
+                  CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
               with:
-                  start: npm run dev # or your dev/start command
-                  wait-on: 'http://localhost:4000' # update to your actual dev URL
-                  wait-on-timeout: 60 # increase if your app takes time to boot
-                  browser: chrome # optional: change or remove to use Electron (default)
+                  start: npm run dev
+                  wait-on: 'http://localhost:4000'
+                  wait-on-timeout: 60
+                  browser: chrome
