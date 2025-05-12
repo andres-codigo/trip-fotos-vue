@@ -4,50 +4,64 @@
 			:show="!!error"
 			:is-error="!!error"
 			:title="dialogTitle"
-			@close="handleError">
+			@close="handleError"
+		>
 			<p>{{ error }}</p>
 		</base-dialog>
-		<base-dialog :show="isLoading" title="Authenticating" fixed>
+		<base-dialog
+			:show="isLoading"
+			title="Authenticating"
+			fixed
+		>
 			<p>Authenticating your details, one moment please...</p>
-			<base-spinner></base-spinner>
+			<base-spinner />
 		</base-dialog>
 		<base-card>
 			<form
 				autocomplete="on"
 				class="user-authentication"
 				data-cy="user-authentication"
-				@submit.prevent="submitForm">
+				@submit.prevent="submitForm"
+			>
 				<div
 					:class="['form-control', { invalid: !email.isValid }]"
-					data-cy="user-auth-email">
+					data-cy="user-auth-email"
+				>
 					<label for="email">{{ email.label }}</label>
 					<input
 						id="email"
 						v-model.trim="email.value"
 						:type="email.type"
-						@blur="clearValidity('email')" />
-					<p v-if="!email.isValid" data-cy="user-auth-email-error">
+						@blur="clearValidity('email')"
+					/>
+					<p
+						v-if="!email.isValid"
+						data-cy="user-auth-email-error"
+					>
 						{{ email.message }}
 					</p>
 				</div>
 				<div
 					:class="['form-control', { invalid: !password.isValid }]"
-					data-cy="user-auth-password">
+					data-cy="user-auth-password"
+				>
 					<label for="password">{{ password.label }}</label>
 					<input
 						id="password"
 						v-model.trim="password.value"
 						:type="password.type"
-						@blur="clearValidity('password')" />
+						@blur="clearValidity('password')"
+					/>
 					<p
 						v-if="!password.isValid"
-						data-cy="user-auth-password-error">
+						data-cy="user-auth-password-error"
+					>
 						{{ password.message }}
 					</p>
 				</div>
-				<base-button data-cy="user-auth-login-button">{{
-					submitButtonCaption
-				}}</base-button>
+				<base-button data-cy="user-auth-login-button">
+					{{ submitButtonCaption }}
+				</base-button>
 				<!-- TODO: Switching temporarily removed -->
 				<!-- <base-button
 					type="button"

@@ -1,12 +1,20 @@
 import eslintJs from '@eslint/js'
-import globals from 'globals'
-import path from 'node:path'
+import { includeIgnoreFile } from '@eslint/compat'
 import { fileURLToPath } from 'node:url'
 import { FlatCompat } from '@eslint/eslintrc'
-import { includeIgnoreFile } from '@eslint/compat'
-import vueParser from 'vue-eslint-parser'
-import pluginVue from 'eslint-plugin-vue'
+import globals from 'globals'
+import path from 'node:path'
+
+import vue from 'eslint-plugin-vue'
+
+import prettierPlugin from 'eslint-plugin-prettier'
+
 import pluginCypress from 'eslint-plugin-cypress/flat'
+
+import vueRules from './rules/vue.js'
+import languageOptions from './rules/language-options.js'
+import vueLanguageOptions from './rules/vue-language-options.js'
+import cypressRules from './rules/cypress.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -15,57 +23,70 @@ const compat = new FlatCompat({
 	recommendedConfig: eslintJs.configs.recommended,
 	allConfig: eslintJs.configs.all,
 })
-const gitignorePath = path.resolve(__dirname, '.gitignore')
+
+const resolvePath = (file) => path.resolve(__dirname, file)
+const gitignorePath = resolvePath('.gitignore')
 
 export default [
+	// Cypress global configurations
 	pluginCypress.configs.globals,
+
+	// Include `.gitignore` for ignored files
 	includeIgnoreFile(gitignorePath),
+
+	// Base ESLint and Prettier configurations
 	...compat.extends('eslint:recommended', 'plugin:prettier/recommended'),
+
+	// Environment settings
 	...compat.env({ es2020: true, node: true }),
+
+	// Global ignores
 	{
-		//---- GLOBAL IGNORES
-		ignores: ['**/dist/', '**/node_modules/', '**/public/', '**/build/'],
+		ignores: [
+			'**/dist/',
+			'**/node_modules/',
+			'**/public/',
+			'**/build/',
+			'**/.cache/',
+			'**/.vscode/',
+			'**/*.min.js',
+			'**/*.bundle.js',
+		],
 	},
-	// general
+
+	// General JavaScript and Vue configurations
 	{
 		files: ['**/*.{js,vue}'],
-		languageOptions: {
-			ecmaVersion: 2022,
-			sourceType: 'module',
-			globals: {
-				...globals.browser,
-				...globals.node,
-				defineProps: 'readonly',
-				defineEmits: 'readonly',
-			},
-		},
+		languageOptions,
 		rules: {
 			'no-console': ['error', { allow: ['warn', 'error'] }],
 			'no-debugger': 'warn',
-			'vue/multi-word-component-names': 'off',
-			'prettier/prettier': 'error',
 			quotes: ['error', 'single'],
+			...vueRules,
 		},
 	},
-	// vue defaults
-	...pluginVue.configs['flat/recommended'],
-	// vue
+
+	// Prettier-specific configurations
+	{
+		files: ['**/*.{js,vue,ts}'],
+		plugins: { prettier: prettierPlugin },
+		rules: {
+			'prettier/prettier': 'error',
+		},
+	},
+
+	// Vue-specific configurations
+	...vue.configs['flat/recommended'],
 	{
 		files: ['**/*.vue'],
-		languageOptions: {
-			parser: vueParser,
-			parserOptions: {
-				sourceType: 'module',
-				ecmaVersion: 2022,
-				ecmaFeatures: {
-					globalReturn: false,
-					impliedStrict: false,
-					jsx: false,
-				},
-			},
+		plugins: {
+			vue,
 		},
+		languageOptions: vueLanguageOptions,
+		rules: vueRules,
 	},
-	// cypress
+
+	// Cypress-specific configurations
 	{
 		plugins: { pluginCypress },
 		files: ['**/*.spec.cy.js'],
@@ -74,15 +95,6 @@ export default [
 			sourceType: 'module',
 			globals: { ...globals.node, ...globals.amd },
 		},
-		rules: {
-			// https://github.com/cypress-io/eslint-plugin-cypress
-			'cypress/no-assigning-return-values': 'error',
-			'cypress/no-unnecessary-waiting': 'error',
-			'cypress/assertion-before-screenshot': 'warn',
-			'cypress/no-force': 'warn',
-			'cypress/no-async-tests': 'error',
-			'cypress/no-async-before': 'error',
-			'cypress/no-pause': 'error',
-		},
+		rules: cypressRules,
 	},
 ]

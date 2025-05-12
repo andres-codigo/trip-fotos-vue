@@ -11,8 +11,14 @@
 			<span
 				v-for="(v, key) in filters"
 				:key="key"
-				:class="['filter-option', { active: v.isActive }]">
-				<input :id="key" type="checkbox" checked @change="setFilter" />
+				:class="['filter-option', { active: v.isActive }]"
+			>
+				<input
+					:id="key"
+					type="checkbox"
+					checked
+					@change="setFilter"
+				/>
 				<label :for="key">{{ key }}</label>
 			</span>
 		</div>

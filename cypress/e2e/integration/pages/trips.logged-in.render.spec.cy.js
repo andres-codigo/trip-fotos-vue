@@ -58,7 +58,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 			.and('have.class', 'nav-header-title-link')
 			.find('a')
 			.then(($navHeaderTitleLink) => {
-				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
+				expect($navHeaderTitleLink.text()).to.equal(' Trip Fotos ')
 				expect($navHeaderTitleLink).to.have.attr(
 					'href',
 					domAttributeUrls.root,
@@ -85,7 +85,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 			.find('a')
 			.then(($navMenuItemAllTravellers) => {
 				expect($navMenuItemAllTravellers.text()).to.equal(
-					'All Travellers',
+					' All Travellers ',
 				)
 				expect($navMenuItemAllTravellers).to.have.attr(
 					'href',

@@ -4,7 +4,8 @@
 			:show="!!error"
 			:is-error="!!error"
 			:title="dialogTitle"
-			@close="handleError">
+			@close="handleError"
+		>
 			<p>{{ error }}</p>
 		</base-dialog>
 		<section>
@@ -12,17 +13,24 @@
 				<header class="messages-header">
 					<h2>Messages</h2>
 				</header>
-				<base-spinner v-if="isLoading"></base-spinner>
-				<ul v-else-if="hasMessages && !isLoading" class="messages">
+				<base-spinner v-if="isLoading" />
+				<ul
+					v-else-if="hasMessages && !isLoading"
+					class="messages"
+				>
 					<message-item
 						v-for="req in receivedMessages"
 						:id="req.id"
 						:key="req.id"
 						:name="req.userName"
 						:email="req.userEmail"
-						:message="req.message"></message-item>
+						:message="req.message"
+					/>
 				</ul>
-				<h3 v-else class="no-messages">
+				<h3
+					v-else
+					class="no-messages"
+				>
 					You don't have any messages yet!
 				</h3>
 			</base-card>

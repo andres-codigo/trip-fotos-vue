@@ -4,9 +4,13 @@
 			<base-card
 				:class="{
 					isLoggedInUser: isLoggedInUser(id, $store.getters.userId),
-				}">
-				<div v-if="isLoading" class="spinner-container">
-					<base-spinner></base-spinner>
+				}"
+			>
+				<div
+					v-if="isLoading"
+					class="spinner-container"
+				>
+					<base-spinner />
 				</div>
 				<div v-else>
 					<h2>{{ fullName }}</h2>
@@ -20,7 +24,8 @@
 							v-for="area in selectedTraveller.areas"
 							:key="area"
 							:type="area"
-							:title="area"></base-badge>
+							:title="area"
+						/>
 					</div>
 				</div>
 			</base-card>
@@ -30,13 +35,18 @@
 				isNotLoggedIn || isLoggedInUser(id, $store.getters.userId)
 					? 'hide'
 					: 'show'
-			">
+			"
+		>
 			<base-card
 				:class="{
 					isLoggedInUser: isLoggedInUser(id, $store.getters.userId),
-				}">
-				<div v-if="isLoading" class="spinner-container">
-					<base-spinner></base-spinner>
+				}"
+			>
+				<div
+					v-if="isLoading"
+					class="spinner-container"
+				>
+					<base-spinner />
 				</div>
 				<header v-else>
 					<h2>Send {{ selectedTraveller.firstName }} a message</h2>
@@ -44,27 +54,39 @@
 						v-if="$route.name !== 'contact-traveller'"
 						link
 						:to="contactLink"
-						>Contact</base-button
 					>
+						Contact
+					</base-button>
 				</header>
-				<router-view></router-view>
+				<router-view />
 			</base-card>
 		</section>
 		<section v-if="!!selectedTraveller.files">
 			<base-card
 				:class="{
 					isLoggedInUser: isLoggedInUser(id, $store.getters.userId),
-				}">
-				<div v-if="isLoading" class="spinner-container">
-					<base-spinner></base-spinner>
+				}"
+			>
+				<div
+					v-if="isLoading"
+					class="spinner-container"
+				>
+					<base-spinner />
 				</div>
-				<div v-else class="images">
-					<ul v-show="!!selectedTraveller.files" class="images-list">
+				<div
+					v-else
+					class="images"
+				>
+					<ul
+						v-show="!!selectedTraveller.files"
+						class="images-list"
+					>
 						<base-image
 							v-for="file in selectedTraveller.files"
 							:key="file"
 							:url="file"
-							:title="fullName"></base-image>
+							:title="fullName"
+						/>
 					</ul>
 				</div>
 			</base-card>

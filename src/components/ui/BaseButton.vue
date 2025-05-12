@@ -4,11 +4,16 @@
 		ref="baseButton"
 		:class="mode"
 		:disabled="disabled"
-		:isError="isError">
-		<slot></slot>
+		:isError="isError"
+	>
+		<slot />
 	</button>
-	<router-link v-else :to="to" :class="mode">
-		<slot></slot>
+	<router-link
+		v-else
+		:to="to"
+		:class="mode"
+	>
+		<slot />
 	</router-link>
 </template>
 

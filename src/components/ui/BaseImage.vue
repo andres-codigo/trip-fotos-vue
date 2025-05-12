@@ -3,12 +3,20 @@
 		:show="!!show"
 		:title="title + `'s photos`"
 		:section-classes="addImageClasses"
-		@close="toggleDialog">
-		<img v-lazy="url" :class="imageOrientation" @load="onImageLoad" />
+		@close="toggleDialog"
+	>
+		<img
+			v-lazy="url"
+			:class="imageOrientation"
+			@load="onImageLoad"
+		/>
 		<!-- TODO: temporary enabled v-lazy load component to test performance once deployed to vercel; will reverse is performance slow -->
 		<!-- <img :src="url" /> -->
 	</base-dialog>
-	<li class="image-preview" @click="toggleDialog">
+	<li
+		class="image-preview"
+		@click="toggleDialog"
+	>
 		<img v-lazy="url" />
 		<!-- TODO: temporary enabled v-lazy load component to test performance once deployed to vercel; will reverse is performance slow -->
 		<!-- <img :src="url" /> -->

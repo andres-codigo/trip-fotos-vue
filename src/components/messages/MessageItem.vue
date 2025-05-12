@@ -3,13 +3,20 @@
 		:show="!!error"
 		:is-error="!!error"
 		:title="dialogTitle"
-		@close="handleError">
+		@close="handleError"
+	>
 		<p>{{ error }}</p>
 	</base-dialog>
-	<div v-if="isLoading" class="spinner-container">
-		<base-spinner></base-spinner>
+	<div
+		v-if="isLoading"
+		class="spinner-container"
+	>
+		<base-spinner />
 	</div>
-	<li v-else class="message">
+	<li
+		v-else
+		class="message"
+	>
 		<div class="container">
 			<h4>From</h4>
 			<p>{{ name }}</p>
@@ -29,8 +36,9 @@
 				mode="outline"
 				class="actions delete"
 				@click="deleteMessage()"
-				>Delete</base-button
 			>
+				Delete
+			</base-button>
 		</div>
 	</li>
 </template>

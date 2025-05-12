@@ -4,11 +4,12 @@
 			:show="!!error"
 			:is-error="!!error"
 			title="An error occurred!"
-			@close="handleError">
+			@close="handleError"
+		>
 			<p>{{ error }}</p>
 		</base-dialog>
 		<section>
-			<trip-filter @change-filter="setFilters"></trip-filter>
+			<trip-filter @change-filter="setFilters" />
 		</section>
 		<section>
 			<base-card>
@@ -24,19 +25,27 @@
 						:disabled="!isLoading && !hasTravellers ? true : false"
 						:class="{ hide: !hasTravellers && !isLoading }"
 						@click="loadTravellers(true)"
-						>Refresh</base-button
 					>
+						Refresh
+					</base-button>
 					<base-button
 						v-if="isLoggedIn && !isTraveller && !isLoading"
 						link
 						to="/register"
-						>Register as a Traveller</base-button
 					>
+						Register as a Traveller
+					</base-button>
 				</div>
-				<div v-if="isLoading" class="spinner-container">
-					<base-spinner></base-spinner>
+				<div
+					v-if="isLoading"
+					class="spinner-container"
+				>
+					<base-spinner />
 				</div>
-				<ul v-else-if="!isLoading && hasTravellers" class="travellers">
+				<ul
+					v-else-if="!isLoading && hasTravellers"
+					class="travellers"
+				>
 					<trip-item
 						v-for="traveller in filteredTravellers"
 						:id="traveller.id"
@@ -47,11 +56,13 @@
 						:days="traveller.daysInCity"
 						:areas="traveller.areas"
 						:files="traveller.files"
-						:registered="traveller.registered"></trip-item>
+						:registered="traveller.registered"
+					/>
 				</ul>
 				<div
 					v-if="!isLoading && !hasTravellers"
-					class="no-travellers-container">
+					class="no-travellers-container"
+				>
 					<h3>No travellers listed.</h3>
 				</div>
 			</base-card>
