@@ -1,4 +1,5 @@
 import {
+	firebase,
 	urls,
 	user,
 	authSelectors,
@@ -106,10 +107,17 @@ describe('User Login Interaction Tests', () => {
 		)
 	})
 
-	it('Displays the home page when valid email and password are entered and the login button is clicked', () => {
+	it.only('Displays the home page when valid email and password are entered and the login button is clicked', () => {
+		cy.intercept(
+			'POST',
+			`${firebase.authUrl}signInWithPassword?key=${firebase.apiKey}`,
+		).as('userAuthLogin')
+
 		cy.get('@userAuthEmail').find('input').type(user.email)
 		cy.get('@userAuthPassword').find('input').type(user.password)
 		cy.get('@userAuthLoginButton').click()
+
+		cy.wait('@userAuthLogin')
 
 		cy.url().should('eq', urls.trips)
 	})

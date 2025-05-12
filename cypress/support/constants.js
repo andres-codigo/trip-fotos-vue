@@ -1,3 +1,8 @@
+export const firebase = {
+	authUrl: Cypress.env('firebase_auth_url'),
+	apiKey: Cypress.env('firebase_api_key'),
+}
+
 export const user = {
 	email: Cypress.env('user_email'),
 	password: Cypress.env('user_password'),
