@@ -107,7 +107,7 @@ describe('User Login Interaction Tests', () => {
 		)
 	})
 
-	it.only('Displays the home page when valid email and password are entered and the login button is clicked', () => {
+	it('Displays the home page when valid email and password are entered and the login button is clicked', () => {
 		cy.intercept(
 			'POST',
 			`${firebase.authUrl}signInWithPassword?key=${firebase.apiKey}`,
