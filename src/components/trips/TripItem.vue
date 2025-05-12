@@ -3,11 +3,15 @@
 		:show="!!error"
 		:is-error="!!error"
 		:title="dialogTitle"
-		@close="handleError">
+		@close="handleError"
+	>
 		<p>{{ error }}</p>
 	</base-dialog>
-	<div v-if="isLoading" class="spinner-container">
-		<base-spinner></base-spinner>
+	<div
+		v-if="isLoading"
+		class="spinner-container"
+	>
+		<base-spinner />
 	</div>
 	<li
 		v-else
@@ -16,33 +20,44 @@
 			{
 				isLoggedInUser: isLoggedInUser(id, $store.getters.userId),
 			},
-		]">
-		<h3 class="name">{{ fullName }}</h3>
+		]"
+	>
+		<h3 class="name">
+			{{ fullName }}
+		</h3>
 		<p class="registered">
 			{{ registeredDate }}
 		</p>
-		<p class="description">{{ shortenedDescription }}</p>
+		<p class="description">
+			{{ shortenedDescription }}
+		</p>
 		<p class="days"><strong>Days in city:</strong> {{ days }} days</p>
 		<div class="badges">
 			<base-badge
 				v-for="area in areas"
 				:key="area"
 				:type="area"
-				:title="area"></base-badge>
+				:title="area"
+			/>
 		</div>
 		<div class="images">
-			<ul v-if="!!files" class="images-list">
+			<ul
+				v-if="!!files"
+				class="images-list"
+			>
 				<base-image
 					v-for="file in files.slice(0, 5)"
 					:key="file"
 					:url="file"
-					:title="fullName"></base-image>
-				<li v-show="files.length > 5" class="image-counter">
-					<router-link :to="travellerDetailsLink"
-						><span>
-							See all {{ files.length }} photos</span
-						></router-link
-					>
+					:title="fullName"
+				/>
+				<li
+					v-show="files.length > 5"
+					class="image-counter"
+				>
+					<router-link :to="travellerDetailsLink">
+						<span> See all {{ files.length }} photos</span>
+					</router-link>
 				</li>
 			</ul>
 		</div>
@@ -52,9 +67,15 @@
 				mode="outline"
 				link
 				:to="travellerContactLink"
-				>Contact</base-button
 			>
-			<base-button link :to="travellerDetailsLink">Details</base-button>
+				Contact
+			</base-button>
+			<base-button
+				link
+				:to="travellerDetailsLink"
+			>
+				Details
+			</base-button>
 			<!--
 				TODO: 	Added to ease deletion of items during development
 						Look to incorporate into working flow dependent on
@@ -67,8 +88,9 @@
 				mode="outline"
 				class="actions delete"
 				@click="deleteTraveller()"
-				>Delete</base-button
 			>
+				Delete
+			</base-button>
 		</div>
 	</li>
 </template>

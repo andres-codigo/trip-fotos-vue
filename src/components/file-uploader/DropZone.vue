@@ -4,8 +4,9 @@
 		@dragenter.prevent="setActive"
 		@dragover.prevent="setActive"
 		@dragleave.prevent="setInactive"
-		@drop.prevent="onDrop">
-		<slot :drop-zone-active="active"></slot>
+		@drop.prevent="onDrop"
+	>
+		<slot :drop-zone-active="active" />
 	</div>
 </template>
 

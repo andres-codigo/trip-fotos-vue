@@ -1,26 +1,38 @@
 <template>
-	<header class="header" data-cy="nav-header-container">
+	<header
+		class="header"
+		data-cy="nav-header-container"
+	>
 		<nav class="navbar">
-			<h1 class="nav-header-title-link" data-cy="nav-header-title-link">
-				<router-link :to="{ name: 'trips-root' }"
-					>Trip Fotos</router-link
-				>
+			<h1
+				class="nav-header-title-link"
+				data-cy="nav-header-title-link"
+			>
+				<router-link :to="{ name: 'trips-root' }">
+					Trip Fotos
+				</router-link>
 			</h1>
 			<ul
 				v-click-outside="closeHamburgerMenu"
 				class="nav-menu-items-container"
-				data-cy="nav-menu-items-container">
-				<li v-if="isLoggedIn" class="nav-menu-item">
+				data-cy="nav-menu-items-container"
+			>
+				<li
+					v-if="isLoggedIn"
+					class="nav-menu-item"
+				>
 					<ul>
 						<li
 							v-if="isTraveller"
 							class="nav-menu-item-messages"
 							data-cy="nav-menu-item-messages"
-							@click.prevent="toggleHamburgerMenuActiveClass()">
+							@click.prevent="toggleHamburgerMenuActiveClass()"
+						>
 							<router-link
 								:to="{ name: 'messages' }"
 								class="nav-link"
-								>Messages
+							>
+								Messages
 								<span
 									v-if="!!totalMessages && totalMessages > 0"
 									class="total-messages-container"
@@ -35,12 +47,14 @@
 						<li
 							class="nav-menu-item-all-travellers"
 							data-cy="nav-menu-item-all-travellers"
-							@click.prevent="toggleHamburgerMenuActiveClass()">
+							@click.prevent="toggleHamburgerMenuActiveClass()"
+						>
 							<router-link
 								:to="{ name: 'trips-list' }"
 								class="nav-link"
-								>All Travellers</router-link
 							>
+								All Travellers
+							</router-link>
 						</li>
 					</ul>
 				</li>
@@ -60,19 +74,21 @@
 				<li
 					v-if="isLoggedIn"
 					class="nav-menu-item nav-menu-item-logout"
-					data-cy="nav-menu-item-logout">
-					<base-button @click="logout"
-						>Logout {{ travellerName }}</base-button
-					>
+					data-cy="nav-menu-item-logout"
+				>
+					<base-button @click="logout">
+						Logout {{ travellerName }}
+					</base-button>
 				</li>
 			</ul>
 			<div
 				v-show="isLoggedIn && $route.name !== 'auth'"
 				class="hamburger"
-				@click="closeHamburgerMenu">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
+				@click="closeHamburgerMenu"
+			>
+				<span class="bar" />
+				<span class="bar" />
+				<span class="bar" />
 			</div>
 		</nav>
 	</header>

@@ -1,9 +1,19 @@
 <template>
-	<component :is="tag" class="file-preview">
-		<button class="close-icon" @click="$emit('remove', file)">
+	<component
+		:is="tag"
+		class="file-preview"
+	>
+		<button
+			class="close-icon"
+			@click="$emit('remove', file)"
+		>
 			&times;
 		</button>
-		<img :src="file.url" :alt="file.file.name" :title="file.file.name" />
+		<img
+			:src="file.url"
+			:alt="file.file.name"
+			:title="file.file.name"
+		/>
 
 		<span
 			v-show="file.status == GlobalConstants.LOADING_IMAGE"

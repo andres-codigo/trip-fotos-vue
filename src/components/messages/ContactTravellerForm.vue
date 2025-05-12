@@ -3,10 +3,14 @@
 		:show="!!error"
 		:is-error="!!error"
 		title="An error occurred!"
-		@close="handleError">
+		@close="handleError"
+	>
 		<p>{{ error }}</p>
 	</base-dialog>
-	<form autocomplete="on" @submit.prevent="submitForm">
+	<form
+		autocomplete="on"
+		@submit.prevent="submitForm"
+	>
 		<div :class="['form-control', { invalid: !name.isValid }]">
 			<label for="name">{{ name.label }}</label>
 			<input
@@ -14,7 +18,8 @@
 				v-model.trim="name.val"
 				:type="name.type"
 				:disabled="disableField('name', $store.getters.userName)"
-				@blur="clearValidity('name')" />
+				@blur="clearValidity('name')"
+			/>
 			<p v-if="!name.isValid">Please enter your name.</p>
 		</div>
 		<div :class="['form-control', { invalid: !email.isValid }]">
@@ -24,7 +29,8 @@
 				v-model.trim="email.val"
 				:type="email.type"
 				:disabled="disableField('email', $store.getters.userEmail)"
-				@blur="clearValidity('email')" />
+				@blur="clearValidity('email')"
+			/>
 			<p v-if="!email.isValid">Please enter a valid email address.</p>
 		</div>
 		<div :class="['form-control', { invalid: !message.isValid }]">
@@ -34,7 +40,8 @@
 				v-model.trim="message.val"
 				:type="message.type"
 				rows="5"
-				@blur="clearValidity('message')"></textarea>
+				@blur="clearValidity('message')"
+			></textarea>
 			<p v-if="!message.isValid">Message must not be empty.</p>
 		</div>
 		<div class="actions">

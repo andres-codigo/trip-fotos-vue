@@ -1,8 +1,15 @@
 <template>
 	<teleport to="body">
-		<div v-if="show" class="backdrop" @click="tryClose"></div>
+		<div
+			v-if="show"
+			class="backdrop"
+			@click="tryClose"
+		></div>
 		<transition name="dialog">
-			<dialog v-if="show" open>
+			<dialog
+				v-if="show"
+				open
+			>
 				<header>
 					<slot name="header">
 						<h2>{{ title }}</h2>
@@ -11,14 +18,18 @@
 				<section
 					:class="
 						sectionClasses ? 'image-section' : 'general-section'
-					">
-					<slot></slot>
+					"
+				>
+					<slot />
 				</section>
 				<menu v-if="!fixed">
 					<slot name="actions">
-						<base-button :is-error="isError" @click="tryClose"
-							>Close</base-button
+						<base-button
+							:is-error="isError"
+							@click="tryClose"
 						>
+							Close
+						</base-button>
 					</slot>
 				</menu>
 			</dialog>

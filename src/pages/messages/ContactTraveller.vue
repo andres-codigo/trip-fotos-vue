@@ -1,5 +1,5 @@
 <template>
-	<contact-traveller-form></contact-traveller-form>
+	<contact-traveller-form />
 </template>
 
 <script>

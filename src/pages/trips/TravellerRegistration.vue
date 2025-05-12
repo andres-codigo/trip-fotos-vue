@@ -4,26 +4,27 @@
 			:show="!!error"
 			:is-error="!!error"
 			:title="dialogTitle"
-			@close="handleError">
+			@close="handleError"
+		>
 			<p>{{ error }}</p>
 		</base-dialog>
 		<base-dialog
 			:show="registeringUser"
 			title="Completing registration"
-			fixed>
+			fixed
+		>
 			<p>
 				Registering you as a traveller<span v-if="fullName"
 					>, {{ fullName }}</span
 				>, one moment please as we review and compress your newly
 				images.
 			</p>
-			<base-spinner></base-spinner>
+			<base-spinner />
 		</base-dialog>
 		<base-card>
 			<div>
 				<h2>Register as a traveller now!</h2>
-				<traveller-form
-					@register-traveller="registerTraveller"></traveller-form>
+				<traveller-form @register-traveller="registerTraveller" />
 			</div>
 		</base-card>
 	</section>
