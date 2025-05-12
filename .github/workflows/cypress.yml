@@ -34,6 +34,6 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                   start: npm run dev # or your dev/start command
-                  wait-on: 'http://localhost:3000' # update to your actual dev URL
+                  wait-on: 'http://localhost:4000' # update to your actual dev URL
                   wait-on-timeout: 60 # increase if your app takes time to boot
                   browser: chrome # optional: change or remove to use Electron (default)
