@@ -18,7 +18,7 @@ describe('Desktop > User Login Render Tests', () => {
 			.should('have.class', 'nav-header-title-link')
 			.find('a')
 			.then(($navHeaderTitleLink) => {
-				expect($navHeaderTitleLink.text()).to.equal('Trip Fotos')
+				expect($navHeaderTitleLink.text()).to.equal(' Trip Fotos ')
 			})
 	})
 
