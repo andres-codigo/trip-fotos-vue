@@ -1,4 +1,4 @@
-import { isNode } from '@/utils/env'
+import { isNode } from '../utils/env.js'
 
 export const FirebaseConstants = Object.freeze({
 	API_KEY: isNode()
