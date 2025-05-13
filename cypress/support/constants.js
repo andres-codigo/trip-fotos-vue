@@ -4,10 +4,10 @@ export const firebase = {
 }
 
 export const httpMethods = {
-	GET: 'GET',
-	POST: 'POST',
-	PUT: 'PUT',
-	DELETE: 'DELETE',
+	GET: Cypress.env('HTTP_METHOD_GET'),
+	POST: Cypress.env('HTTP_METHOD_POST'),
+	PUT: Cypress.env('HTTP_METHOD_PUT'),
+	DELETE: Cypress.env('HTTP_METHOD_DELETE'),
 }
 
 export const user = {
