@@ -1,6 +1,6 @@
 import {
-	urls,
 	user,
+	urls,
 	authSelectors,
 	topNavigationSelectors,
 } from '../../../support/constants'
