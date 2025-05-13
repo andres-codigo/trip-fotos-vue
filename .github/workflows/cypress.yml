@@ -1,0 +1,45 @@
+name: Run Cypress Tests
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'src/**'
+            - 'cypress/**'
+            - 'package.json'
+            - 'cypress.config.*'
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20.13.1'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Start app & run Cypress tests
+              uses: cypress-io/github-action@v6
+              env:
+                  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+                  VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+                  VITE_BACKEND_BASE_URL: ${{ secrets.VITE_BACKEND_BASE_URL }}
+                  CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
+                  CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
+              with:
+                  start: npm run dev
+                  wait-on: 'http://localhost:4000'
+                  wait-on-timeout: 60
+                  browser: chrome
