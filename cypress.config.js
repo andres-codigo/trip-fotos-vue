@@ -1,5 +1,7 @@
 import { defineConfig } from 'cypress'
 
+import { APIConstants } from './src/constants/api.js'
+
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -17,6 +19,10 @@ export default defineConfig({
 			TRIPS_URL: '/trips',
 			REGISTER_URL: '/register',
 			MESSAGES_URL: '/messages',
+			HTTP_METHOD_GET: APIConstants.GET,
+			HTTP_METHOD_POST: APIConstants.POST,
+			HTTP_METHOD_PUT: APIConstants.PUT,
+			HTTP_METHOD_DELETE: APIConstants.DELETE,
 		},
 	},
 })
