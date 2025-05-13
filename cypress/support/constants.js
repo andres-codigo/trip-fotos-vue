@@ -1,11 +1,11 @@
 export const firebase = {
-	authUrl: Cypress.env('firebase_auth_url'),
-	apiKey: Cypress.env('firebase_api_key'),
+	authUrl: Cypress.env('FIREBASE_AUTH_URL'),
+	apiKey: Cypress.env('FIREBASE_API_KEY'),
 }
 
 export const user = {
-	email: Cypress.env('user_email'),
-	password: Cypress.env('user_password'),
+	email: Cypress.env('USER_EMAIL'),
+	password: Cypress.env('USER_PASSWORD'),
 	validEmail: 'valid@email.com',
 	invalidEmail: 'invalid@email',
 }
@@ -13,17 +13,17 @@ export const user = {
 export const baseUrl = Cypress.config('baseUrl')
 
 export const urls = {
-	cyAuth: baseUrl + Cypress.env('auth_url'),
-	loginRedirectUrl: baseUrl + Cypress.env('trips_url'),
-	logoutRedirectUrl: baseUrl + Cypress.env('auth_url'),
-	trips: baseUrl + Cypress.env('trips_url'),
-	messages: baseUrl + Cypress.env('messages_url'),
+	cyAuth: baseUrl + Cypress.env('AUTH_URL'),
+	loginRedirectUrl: baseUrl + Cypress.env('TRIPS_URL'),
+	logoutRedirectUrl: baseUrl + Cypress.env('AUTH_URL'),
+	trips: baseUrl + Cypress.env('TRIPS_URL'),
+	messages: baseUrl + Cypress.env('MESSAGES_URL'),
 }
 
 export const domAttributeUrls = {
-	root: Cypress.env('root_url'),
-	trips: Cypress.env('trips_url'),
-	messages: Cypress.env('messages_url'),
+	root: Cypress.env('ROOT_URL'),
+	trips: Cypress.env('TRIPS_URL'),
+	messages: Cypress.env('MESSAGES_URL'),
 }
 
 export const authSelectors = {
