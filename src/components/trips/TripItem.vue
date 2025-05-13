@@ -100,11 +100,7 @@ import { StoreMessagesConstants } from '@/constants/store-messages'
 import { DataConstants } from '@/constants/data'
 import { GlobalConstants } from '@/constants/global'
 
-import {
-	formatDate,
-	isLoggedInUser,
-	delayLoading,
-} from '@/utils/globalFunctions'
+import { formatDate, isLoggedInUser, delayLoading } from '@/utils/global'
 
 export default {
 	props: {

@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { isLoggedInUser } from '@/utils/globalFunctions'
+import { isLoggedInUser } from '@/utils/global'
 
 export default {
 	props: {
