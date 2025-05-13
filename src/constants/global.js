@@ -1,8 +1,8 @@
-const isNode = typeof process !== 'undefined' && process.env
+import { isNode } from '../utils/env.js'
 
 export const GlobalConstants = Object.freeze({
 	// ADMIN
-	ADMIN_ID: isNode
+	ADMIN_ID: isNode()
 		? process.env.VITE_ADMIN_ID
 		: import.meta.env.VITE_ADMIN_ID,
 

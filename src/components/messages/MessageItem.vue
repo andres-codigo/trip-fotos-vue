@@ -46,7 +46,7 @@
 <script>
 import { StoreMessagesConstants } from '@/constants/store-messages'
 import { GlobalConstants } from '@/constants/global'
-import { delayLoading } from '@/utils/globalFunctions'
+import { delayLoading } from '@/utils/global'
 
 export default {
 	props: {
