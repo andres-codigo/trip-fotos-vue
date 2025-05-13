@@ -1,7 +1,8 @@
 import {
 	firebase,
-	urls,
+	httpMethods,
 	user,
+	urls,
 	authSelectors,
 	authErrorMessages,
 } from '../../../support/constants'
@@ -109,7 +110,7 @@ describe('User Login Interaction Tests', () => {
 
 	it('Displays the home page when valid email and password are entered and the login button is clicked', () => {
 		cy.intercept(
-			'POST',
+			httpMethods.POST,
 			`${firebase.authUrl}signInWithPassword?key=${firebase.apiKey}`,
 		).as('userAuthLogin')
 
