@@ -7,10 +7,10 @@ export const isLoggedInUser = (id, userId) => {
 	return true
 }
 
-export function formatDate(value, format) {
+export const formatDate = (value, format) => {
 	return moment(value).format(format)
 }
 
-export function delayLoading(milliseconds) {
+export const delayLoading = (milliseconds) => {
 	return new Promise((resolve) => setTimeout(resolve, milliseconds))
 }
