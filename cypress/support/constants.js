@@ -3,6 +3,13 @@ export const firebase = {
 	apiKey: Cypress.env('FIREBASE_API_KEY'),
 }
 
+export const httpMethods = {
+	GET: 'GET',
+	POST: 'POST',
+	PUT: 'PUT',
+	DELETE: 'DELETE',
+}
+
 export const user = {
 	email: Cypress.env('USER_EMAIL'),
 	password: Cypress.env('USER_PASSWORD'),
