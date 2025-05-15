@@ -1,0 +1,40 @@
+name: Track Repo Clones
+
+on:
+    schedule:
+        - cron: '0 0 * * *' # Every day at midnight UTC
+    workflow_dispatch:
+
+jobs:
+    track-clones:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install jq
+              run: sudo apt-get update && sudo apt-get install -y jq
+
+            - name: Get Repo Traffic Data
+              id: traffic
+              run: |
+                  curl -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+                       -H "Accept: application/vnd.github+json" \
+                       https://api.github.com/repos/${{ github.repository }}/traffic/clones > clones.json
+
+                  cat clones.json
+
+            - name: Send Notification to Discord
+              if: always()
+              run: |
+                  CLONE_COUNT=$(jq '.count' clones.json)
+                  UNIQUE_COUNT=$(jq '.uniques' clones.json)
+
+                  echo "Total Clones: $CLONE_COUNT"
+                  echo "Unique Cloners: $UNIQUE_COUNT"
+
+                  if [[ "$CLONE_COUNT" != "null" && "$CLONE_COUNT" -gt 0 ]]; then
+                    curl -H "Content-Type: application/json" \
+                         -X POST \
+                         -d "{\"content\": \"🚨 Repo cloned! Total: $CLONE_COUNT, Unique: $UNIQUE_COUNT\"}" \
+                         ${{ secrets.TRIP_FOTOS_vue_WEBHOOK }}
+                  else
+                    echo "No clone data or zero clones."
+                  fi
