@@ -17,14 +17,15 @@ dist
 
 # ENVIRONMENT
 .env
-.env.test
-*.local
-
-# TESTING
-cypress/downloads/
 
 # LINTING
 .eslintcache
 
 # VITE
 .vite
+
+# CYRPESS TESTING
+cypress/downloads/
+
+# BASH SCRIPTS
+.bash-scripts
