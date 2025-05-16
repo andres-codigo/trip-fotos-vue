@@ -25,4 +25,11 @@ export default defineConfig({
 			HTTP_METHOD_DELETE: APIConstants.DELETE,
 		},
 	},
+
+	component: {
+		devServer: {
+			framework: 'vue',
+			bundler: 'vite',
+		},
+	},
 })

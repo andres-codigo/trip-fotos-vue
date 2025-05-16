@@ -47,5 +47,18 @@
 		"vite": "^6.3.5",
 		"vite-plugin-eslint2": "^5.0.3",
 		"vue-eslint-parser": "^10.1.3"
+	},
+	"engines": {
+		"node": "20.x"
+	},
+	"browserslist": {
+		"production": [
+			"defaults"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	}
 }
