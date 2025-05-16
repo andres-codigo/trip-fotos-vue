@@ -235,6 +235,7 @@ export default {
 	}
 	.name {
 		font-size: 1.5rem;
+		font-weight: 400;
 		margin: 0;
 	}
 
