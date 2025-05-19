@@ -96,8 +96,9 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import { StoreMessagesConstants } from '@/constants/store-messages'
-import { DataConstants } from '@/constants/data'
 import { GlobalConstants } from '@/constants/global'
 import { PATHS } from '@/constants/paths'
 
@@ -148,7 +149,9 @@ export default {
 	},
 	computed: {
 		registeredDate() {
-			return formatDate(this.registered, DataConstants.DD_MMM_YYYY)
+			return this.registered
+				? moment(this.registered).format('DD MMM YYYY')
+				: ''
 		},
 		fullName() {
 			return this.firstName + ' ' + this.lastName
