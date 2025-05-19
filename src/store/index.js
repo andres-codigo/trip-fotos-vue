@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
 
-import travellersModule from './modules/travellers/index.js'
-import messagesModule from './modules/messages/index.js'
-import authModule from './modules/auth/index.js'
+import travellersModule from '@/store/modules/travellers/index.js'
+import messagesModule from '@/store/modules/messages/index.js'
+import authModule from '@/store/modules/auth/index.js'
 
 const store = createStore({
 	modules: {

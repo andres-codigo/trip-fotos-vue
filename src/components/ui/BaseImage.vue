@@ -61,8 +61,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/mixins/mixins';
-
 .image-preview {
 	margin: 1rem 2.5%;
 	overflow: hidden;
@@ -107,29 +105,9 @@ export default {
 }
 
 // min/max width media resizing
-@include mixins.dialog-min-max-width-image-resizing(
-	0px,
-	410px,
-	250px,
-	'portrait'
-);
-@include mixins.dialog-min-max-width-image-resizing(
-	411px,
-	667px,
-	300px,
-	'portrait'
-);
-@include mixins.dialog-min-max-width-image-resizing(
-	668px,
-	2000px,
-	350px,
-	'portrait'
-);
+@include dialog-min-max-width-image-resizing(0px, 410px, 250px, 'portrait');
+@include dialog-min-max-width-image-resizing(411px, 667px, 300px, 'portrait');
+@include dialog-min-max-width-image-resizing(668px, 2000px, 350px, 'portrait');
 
-@include mixins.dialog-min-max-width-image-resizing(
-	0px,
-	2048px,
-	90%,
-	'landscape'
-);
+@include dialog-min-max-width-image-resizing(0px, 2048px, 90%, 'landscape');
 </style>

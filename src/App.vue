@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import { PATHS } from './constants/paths'
+import { PATHS } from '@/constants/paths'
 
-import TheHeader from './components/layout/TheHeader.vue'
+import TheHeader from '@/components/layout/TheHeader.vue'
 
 export default {
 	components: {

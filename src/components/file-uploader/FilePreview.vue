@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { GlobalConstants } from '../../constants/global'
+import { GlobalConstants } from '@/constants/global'
 
 defineProps({
 	file: { type: Object, required: true },
@@ -45,8 +45,6 @@ defineEmits(['remove'])
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/variables';
-
 .file-preview {
 	aspect-ratio: 1/1;
 	margin: 1rem 2.5%;
@@ -77,8 +75,8 @@ defineEmits(['remove'])
 	}
 
 	.close-icon {
-		background: variables.$color-el-salva;
-		color: variables.$color-white;
+		background: $color-el-salva;
+		color: $color-white;
 		cursor: pointer;
 		font-size: var(--size);
 		top: 0.25rem;
@@ -94,31 +92,31 @@ defineEmits(['remove'])
 
 	.loading-indicator {
 		animation: pulse 1.5s linear 0s infinite;
-		color: variables.$color-black;
+		color: $color-black;
 	}
 
 	.success-indicator {
-		background: variables.$color-mantis;
-		color: variables.$color-black;
+		background: $color-mantis;
+		color: $color-black;
 	}
 
 	.failure-indicator {
-		background: variables.$color-el-salva;
-		color: variables.$color-white;
+		background: $color-el-salva;
+		color: $color-white;
 	}
 }
 
 @keyframes pulse {
 	0% {
-		background: variables.$color-white;
+		background: $color-white;
 	}
 
 	50% {
-		background: variables.$color-alto;
+		background: $color-alto;
 	}
 
 	100% {
-		background: variables.$color-white;
+		background: $color-white;
 	}
 }
 

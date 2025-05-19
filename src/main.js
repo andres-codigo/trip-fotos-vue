@@ -28,7 +28,7 @@ const BaseDialog = defineAsyncComponent(
 
 window.$store = store
 
-import './styles/base.scss'
+import '@/styles/base.scss'
 
 const app = createApp(App)
 
