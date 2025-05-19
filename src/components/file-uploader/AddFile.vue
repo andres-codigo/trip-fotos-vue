@@ -65,8 +65,6 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/variables';
-
 .file-drop {
 	height: 100%;
 	justify-content: center;
@@ -74,7 +72,7 @@ defineExpose({
 	text-align: center;
 
 	.drop-area {
-		border: 1px dashed variables.$color-silver;
+		border: 1px dashed $color-silver;
 		margin: 0 auto;
 		margin-bottom: 15px;
 		max-width: 800px;
@@ -85,8 +83,8 @@ defineExpose({
 		-moz-osx-font-smoothing: grayscale;
 
 		&:hover {
-			background-color: variables.$color-alto;
-			border: 1px dashed variables.$color-pigment-indigo;
+			background-color: $color-alto;
+			border: 1px dashed $color-pigment-indigo;
 		}
 
 		label {
@@ -112,8 +110,8 @@ defineExpose({
 			}
 		}
 		.image-list {
-			background-color: variables.$color-azure;
-			border: 1px solid variables.$color-white;
+			background-color: $color-azure;
+			border: 1px solid $color-white;
 			display: flex;
 			flex-wrap: wrap;
 			list-style: none;

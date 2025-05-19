@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import AddFile from '../file-uploader/AddFile.vue'
+import AddFile from '@/components/file-uploader/AddFile.vue'
 
 export default {
 	components: {
@@ -232,38 +232,35 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/mixins/form/valid/valid';
-@use '../../styles/setup/mixins/form/invalid/invalid';
-
 form {
 	.form-control {
 		margin: 0.5rem 0;
 
-		@include valid.input-textarea;
+		@include input-textarea;
 
 		.checkbox-label {
 			font-size: 1rem;
 			margin: 0.5rem 0;
 		}
 
-		@include valid.checkbox;
+		@include checkbox;
 
 		&.invalid {
 			p {
-				@include invalid.error-message;
+				@include error-message;
 			}
 
 			input,
 			textarea {
-				@include invalid.invalid-border;
+				@include invalid-border;
 			}
 
-			@include invalid.invalid-checkbox;
+			@include invalid-checkbox;
 		}
 	}
 
 	.invalid-form {
-		@include invalid.error-message;
+		@include error-message;
 	}
 }
 </style>

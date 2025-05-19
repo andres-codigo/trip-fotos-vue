@@ -96,9 +96,11 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 import { StoreMessagesConstants } from '@/constants/store-messages'
-import { DataConstants } from '@/constants/data'
 import { GlobalConstants } from '@/constants/global'
+import { PATHS } from '@/constants/paths'
 
 import { formatDate, isLoggedInUser, delayLoading } from '@/utils/global'
 
@@ -147,7 +149,9 @@ export default {
 	},
 	computed: {
 		registeredDate() {
-			return formatDate(this.registered, DataConstants.DD_MMM_YYYY)
+			return this.registered
+				? moment(this.registered).format('DD MMM YYYY')
+				: ''
 		},
 		fullName() {
 			return this.firstName + ' ' + this.lastName
@@ -161,7 +165,7 @@ export default {
 			return description
 		},
 		travellerContactLink() {
-			return this.$route.path + '/' + this.id + '/contact' // /trips/c1/contact
+			return this.$route.path + '/' + this.id + PATHS.CONTACT // /trips/c1/contact
 		},
 		travellerDetailsLink() {
 			return this.$route.path + '/' + this.id // /trips/c1
@@ -235,6 +239,7 @@ export default {
 	}
 	.name {
 		font-size: 1.5rem;
+		font-weight: 400;
 		margin: 0;
 	}
 

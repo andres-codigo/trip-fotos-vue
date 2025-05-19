@@ -76,8 +76,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/variables';
-
 .backdrop {
 	background-color: rgba(0, 0, 0, 0.75);
 	height: 100%;
@@ -89,7 +87,7 @@ export default {
 }
 
 dialog {
-	background-color: variables.$color-white;
+	background-color: $color-white;
 	border: none;
 	border-radius: 12px;
 	bottom: 0;
@@ -104,8 +102,8 @@ dialog {
 	z-index: 100;
 
 	header {
-		background-color: variables.$color-ripe-plum;
-		color: variables.$color-white;
+		background-color: $color-ripe-plum;
+		color: $color-white;
 		padding: 1rem;
 		width: 100%;
 

@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import TheHeader from './components/layout/TheHeader.vue'
+import { PATHS } from '@/constants/paths'
+
+import TheHeader from '@/components/layout/TheHeader.vue'
 
 export default {
 	components: {
@@ -28,7 +30,7 @@ export default {
 			if (curValue && curValue !== oldValue) {
 				// When user logs out or Local Storage tokens expire
 				// user is redirected to login page
-				this.$router.replace('/auth')
+				this.$router.replace(PATHS.AUTHENTICATION)
 			}
 		},
 	},
@@ -41,7 +43,3 @@ export default {
 <script setup>
 import { SpeedInsights } from '@vercel/speed-insights/vue'
 </script>
-
-<style lang="scss">
-@use './styles/setup/typography.scss';
-</style>

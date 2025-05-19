@@ -1,5 +1,5 @@
-import { APIConstants } from '../../../constants/api'
-import { APIErrorMessageConstants } from '../../../constants/api-messages'
+import { APIConstants } from '@/constants/api'
+import { APIErrorMessageConstants } from '@/constants/api-messages'
 
 let timer
 

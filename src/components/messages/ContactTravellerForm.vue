@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import { PATHS } from '@/constants/paths'
+
 export default {
 	data() {
 		return {
@@ -162,7 +164,7 @@ export default {
 						travellerId: this.$route.params.id,
 					})
 					.then(() => {
-						this.$router.replace('/trips')
+						this.$router.replace(PATHS.TRIPS)
 					})
 			} catch (error) {
 				this.error = error.message || 'Something went wrong!'
@@ -173,23 +175,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/mixins/form/valid/valid';
-@use '../../styles/setup/mixins/form/invalid/invalid';
-
 form {
 	.form-control {
 		margin: 0.5rem 0;
 
-		@include valid.input-textarea;
+		@include input-textarea;
 
 		&.invalid {
 			p {
-				@include invalid.error-message;
+				@include error-message;
 			}
 
 			input,
 			textarea {
-				@include invalid.invalid-border;
+				@include invalid-border;
 			}
 		}
 	}

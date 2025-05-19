@@ -33,6 +33,7 @@
 <script>
 import { StoreMessagesConstants } from '@/constants/store-messages'
 import { GlobalConstants } from '@/constants/global'
+import { PATHS } from '@/constants/paths'
 
 import TravellerForm from '@/components/trips/TravellerForm.vue'
 
@@ -68,7 +69,7 @@ export default {
 					})
 				})
 				.then(() => {
-					this.$router.replace('/trips')
+					this.$router.replace(PATHS.TRIPS)
 				})
 				.catch((error) => {
 					this.error =

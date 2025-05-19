@@ -1,12 +1,62 @@
-// Import Roboto font
+// Roboto font
+// https: //fonts.google.com/specimen/Roboto
+
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('/fonts/Roboto-Thin.woff2') format('woff2'),
+		url('/fonts/Roboto-Thin.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('/fonts/Roboto-Light.woff2') format('woff2'),
+		url('/fonts/Roboto-Light.woff') format('woff');
+}
+
 @font-face {
 	font-family: 'Roboto';
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
-	unicode-range: U+000-5FF;
 	src:
-		local('Roboto'),
-		url('@/assets/fonts/Roboto-Regular.woff') format('woff'),
-		url('@/assets/fonts/Roboto-Regular.ttf') format('truetype');
+		url('/fonts/Roboto-Regular.woff2') format('woff2'),
+		url('/fonts/Roboto-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('/fonts/Roboto-Medium.woff2') format('woff2'),
+		url('/fonts/Roboto-Medium.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('/fonts/Roboto-Bold.woff2') format('woff2'),
+		url('/fonts/Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url('/fonts/Roboto-Black.woff2') format('woff2'),
+		url('/fonts/Roboto-Black.woff') format('woff');
 }

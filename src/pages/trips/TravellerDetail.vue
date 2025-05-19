@@ -96,6 +96,7 @@
 
 <script>
 import { isLoggedInUser } from '@/utils/global'
+import { PATHS } from '@/constants/paths'
 
 export default {
 	props: {
@@ -124,7 +125,7 @@ export default {
 			)
 		},
 		contactLink() {
-			return this.$route.path + '/contact'
+			return this.$route.path + PATHS.CONTACT
 		},
 		traveller() {
 			return this.$store.getters['travellers/traveller']
@@ -162,8 +163,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use '../../styles/setup/mixins/mixins';
-
 .traveller-detail-container {
 	display: inline-block;
 	padding: 0 20px;
@@ -178,7 +177,7 @@ export default {
 
 	.spinner-container-images {
 		height: 146.797px;
-		@include mixins.fadeIn(ease, 2s, 1, forwards);
+		@include fadeIn(ease, 2s, 1, forwards);
 	}
 
 	.images {
@@ -188,7 +187,7 @@ export default {
 			list-style: none;
 			padding: 0;
 
-			@include mixins.fadeIn(ease, 2s, 1, forwards);
+			@include fadeIn(ease, 2s, 1, forwards);
 		}
 	}
 }

@@ -7,9 +7,9 @@ import {
 	deleteObject,
 } from 'firebase/storage'
 
-import { APIConstants } from '../../../constants/api'
-import { GlobalConstants } from '../../../constants/global'
-import { APIErrorMessageConstants } from '../../../constants/api-messages'
+import { APIConstants } from '@/constants/api'
+import { GlobalConstants } from '@/constants/global'
+import { APIErrorMessageConstants } from '@/constants/api-messages'
 
 export default {
 	async registerTraveller(context, data) {
@@ -88,7 +88,7 @@ export default {
 				daysInCity: data.days,
 				areas: data.areas,
 				files: imageUrls,
-				registered: new Date(),
+				registered: new Date().toISOString(),
 			}
 
 			const response = await fetch(
