@@ -99,6 +99,7 @@
 import { StoreMessagesConstants } from '@/constants/store-messages'
 import { DataConstants } from '@/constants/data'
 import { GlobalConstants } from '@/constants/global'
+import { PATHS } from '@/constants/paths'
 
 import { formatDate, isLoggedInUser, delayLoading } from '@/utils/global'
 
@@ -161,7 +162,7 @@ export default {
 			return description
 		},
 		travellerContactLink() {
-			return this.$route.path + '/' + this.id + '/contact' // /trips/c1/contact
+			return this.$route.path + '/' + this.id + PATHS.CONTACT // /trips/c1/contact
 		},
 		travellerDetailsLink() {
 			return this.$route.path + '/' + this.id // /trips/c1

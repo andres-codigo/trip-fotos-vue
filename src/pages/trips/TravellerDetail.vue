@@ -96,6 +96,7 @@
 
 <script>
 import { isLoggedInUser } from '@/utils/global'
+import { PATHS } from '@/constants/paths'
 
 export default {
 	props: {
@@ -124,7 +125,7 @@ export default {
 			)
 		},
 		contactLink() {
-			return this.$route.path + '/contact'
+			return this.$route.path + PATHS.CONTACT
 		},
 		traveller() {
 			return this.$store.getters['travellers/traveller']

@@ -31,7 +31,7 @@
 					<base-button
 						v-if="isLoggedIn && !isTraveller && !isLoading"
 						link
-						to="/register"
+						:to="PATHS.REGISTER"
 					>
 						Register as a Traveller
 					</base-button>
@@ -73,6 +73,7 @@
 <script>
 import TripItem from '@/components/trips/TripItem.vue'
 import TripFilter from '@/components/trips/TripFilter.vue'
+import { PATHS } from '@/constants/paths.js'
 
 export default {
 	components: {
@@ -97,6 +98,7 @@ export default {
 					isActive: true,
 				},
 			},
+			PATHS,
 		}
 	},
 	computed: {

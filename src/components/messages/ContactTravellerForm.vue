@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import { PATHS } from '@/constants/paths'
+
 export default {
 	data() {
 		return {
@@ -162,7 +164,7 @@ export default {
 						travellerId: this.$route.params.id,
 					})
 					.then(() => {
-						this.$router.replace('/trips')
+						this.$router.replace(PATHS.TRIPS)
 					})
 			} catch (error) {
 				this.error = error.message || 'Something went wrong!'

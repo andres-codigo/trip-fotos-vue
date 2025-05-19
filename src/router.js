@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { PATHS } from '@/constants/paths.js'
+
 import store from '@/store/index.js'
 
 const TripsList = () => import('@/pages/trips/TripsList.vue')
@@ -21,26 +23,26 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: '/',
-			redirect: '/trips',
+			path: PATHS.HOME,
+			redirect: PATHS.TRIPS,
 			name: 'trips-root',
 			meta: { requiresAuth: true },
 		},
 		{
-			path: '/trips',
+			path: PATHS.TRIPS,
 			name: 'trips-list',
 			component: TripsList,
 			meta: { requiresAuth: true },
 		},
 		{
-			path: '/trips/:id',
+			path: PATHS.TRIPS + '/:id',
 			name: 'traveller-detail',
 			component: TravellerDetail,
 			props: true,
 			meta: { requiresAuth: true },
 			children: [
 				{
-					path: 'contact',
+					path: PATHS.CHILDREN_ROUTE_CONTACT,
 					name: 'contact-traveller',
 					component: ContactTraveller,
 					meta: { requiresAuth: true },
@@ -48,19 +50,19 @@ const router = createRouter({
 			],
 		},
 		{
-			path: '/register',
+			path: PATHS.REGISTER,
 			name: 'register',
 			component: TravellerRegistration,
 			meta: { requiresAuth: true },
 		},
 		{
-			path: '/messages',
+			path: PATHS.MESSAGES,
 			name: 'messages',
 			component: MessagesReceived,
 			meta: { requiresAuth: true },
 		},
 		{
-			path: '/auth',
+			path: PATHS.AUTHENTICATION,
 			name: 'auth',
 			component: UserAuth,
 			meta: { requiresUnauth: true },
@@ -76,9 +78,9 @@ const router = createRouter({
 // Global Navigation Guard
 router.beforeEach(function (to, _, next) {
 	if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-		next('/auth')
+		next(PATHS.AUTHENTICATION)
 	} else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
-		next('/trips')
+		next(PATHS.TRIPS)
 	} else {
 		next()
 	}

@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { PATHS } from './constants/paths'
+
 import TheHeader from './components/layout/TheHeader.vue'
 
 export default {
@@ -28,7 +30,7 @@ export default {
 			if (curValue && curValue !== oldValue) {
 				// When user logs out or Local Storage tokens expire
 				// user is redirected to login page
-				this.$router.replace('/auth')
+				this.$router.replace(PATHS.AUTHENTICATION)
 			}
 		},
 	},
