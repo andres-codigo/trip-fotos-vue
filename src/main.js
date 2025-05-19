@@ -28,6 +28,8 @@ const BaseDialog = defineAsyncComponent(
 
 window.$store = store
 
+import './styles/base.scss'
+
 const app = createApp(App)
 
 app.use(VueFire, {

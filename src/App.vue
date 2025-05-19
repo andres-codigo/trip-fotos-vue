@@ -43,7 +43,3 @@ export default {
 <script setup>
 import { SpeedInsights } from '@vercel/speed-insights/vue'
 </script>
-
-<style lang="scss">
-@use './styles/setup/typography.scss';
-</style>
