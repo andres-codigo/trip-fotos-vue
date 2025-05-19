@@ -88,7 +88,7 @@ export default {
 				daysInCity: data.days,
 				areas: data.areas,
 				files: imageUrls,
-				registered: new Date(),
+				registered: new Date().toISOString(),
 			}
 
 			const response = await fetch(
