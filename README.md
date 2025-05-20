@@ -1,5 +1,7 @@
 # trip-fotos-vue
 
+[![Run Cypress Tests](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress.yml/badge.svg)](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress.yml)
+
 ## Contents
 
 - [📘 About This Project](#about-this-project)
@@ -14,6 +16,7 @@
 - [🛠️ Build](#build)
 - [📦 Deployment](#deployment)
 - [✨ Features](#features)
+- [📁 Folder Structure](#folder-structure)
 - [🧯 Troubleshooting](#troubleshooting)
 
 <a id="about-this-project"></a>
@@ -22,7 +25,7 @@
 
 This project is a UI and functional extension on Udemy's Vue - The Complete Guide (incl. Router & Composition API) > 'Find a coach' project.
 
-If has been converted from "finding a coach" to "finding popular travel destinations" tied to a registered traveller.
+It has been converted from "finding a coach" to "finding popular travel destinations" tied to a registered traveller.
 
 <a id="stack"></a>
 
@@ -175,6 +178,10 @@ npm run preview
 ### Environment Variables
 
 Create a `.env` file in the root directory and add the following key-value pairs:
+
+**Note:**
+Do not commit your `.env` file to version control.
+Instead, create a `.env.example` file (without sensitive values) to document required environment variables for collaborators.
 
 ```bash
 
@@ -339,7 +346,7 @@ npm run test:coverage # Run tests with coverage reporting
 
 ### 🛠 Manual Triggers
 
-Some workflows, like the **Vitest test runner**, can be manually executed from the GitHub UI:
+Some workflows, like the **Cypress test runner**, can be manually executed from the GitHub UI:
 
 1. Navigate to the **Actions** tab of the repository
 2. Select the desired workflow (e.g., **"Run Cypress Tests"**)
@@ -395,9 +402,60 @@ This project is configured for deployment on [Vercel](https://vercel.com/).
   Assign admin rights to a specific user by adding their Firebase Auth User UID to the `.env` file under `VITE_ADMIN_ID`. This allows the admin user to delete other travellers.
 
 - **Traveller Profiles**
-  Registered travellers can add a description of their travel destination, choose where they travelled to, the number of days spent there, as well as upload photos. They are also able to leave contact and send a messages on other traveller against their profile.
+  Registered travellers can add a description of their travel destination, choose where they travelled to, the number of days spent there, as well as upload photos. They are also able to leave contact and send messages on other traveller against their profile.
 
-    <a id="troubleshooting"></a>
+<a id="folder-structure"></a>
+
+## 📁 Folder Structure
+
+```
+trip-fotos-vue/
+├── .github/            # GitHub Actions workflows
+├── cypress/            # Cypress tests
+├── public/             # Static assets
+├── rules/              # ESLint configuration rules
+├── src/
+│   ├── assets/         # Fonts, SVGs, and other static assets
+│   ├── components/     # Reusable Vue components
+│   ├── composables     # Vue 3 Composition API functions (composables)
+│   ├── constants/      # Global, Firebase, API, paths, and other constants
+│   ├── directives/     # Custom Vue directives
+│   ├── pages/          # Top-level route components
+│   ├── store/          # Vuex store modules
+│   ├── styles/         # SCSS stylesheets
+│   ├── utils/          # General utility functions
+│   ├── App.js          # Root Vue component
+│   ├── firebase.js     # Firebase configuration
+│   ├── main.js         # App entry point
+│   └── router.js       # Vue Router configuration
+├── .env                        # Environment variables (not committed to version control)
+├── .firebaserc                 # Firebase project configuration
+├── .gitignore                  # Git ignore rules
+├── .npmrc                      # npm configuration file.
+├── .prettierignore             # Prettier ignore rules
+├── .prettierrc.json            # Prettier configuration
+├── cypress.config.js           # Cypress testing configuration
+├── eslint.config.mjs           # ESLint configuration
+├── index.html                  # Main HTML template for the app
+├── jsconfig.json               # JS configuration
+├── package.json                # Project dependencies and scripts
+├── README.md                   # Project documentation
+├── vercel.json                 # Vercel deployment configuration
+└── vite.config.js              # Vite build tool configuration
+```
+
+### Explanation of Additional Files:
+
+1. **`.firebaserc`**: Firebase project configuration file for managing Firebase environments.
+2. **`.gitignore`**: Specifies files and directories to be ignored by Git (e.g., `node_modules`, `.env`).
+3. **`.prettierignore`**: Specifies files and directories to be ignored by Prettier for formatting.
+4. **`.prettierrc.json`**: Configuration file for Prettier to enforce consistent code formatting.
+5. **`cypress.config.js`**: Configuration file for Cypress end-to-end testing.
+6. **`eslint.config.mjs`**: ESLint configuration file for linting JavaScript/TypeScript code.
+7. **`vercel.json`**: Configuration file for deploying the project to Vercel.
+8. **`vite.config.js`**: Configuration file for Vite, specifying plugins, aliases, and build options.
+
+<a id="troubleshooting"></a>
 
 ## 🧯 Troubleshooting
 
