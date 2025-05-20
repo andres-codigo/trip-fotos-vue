@@ -1,5 +1,5 @@
 <template>
-	<section class="traveller-detail-container">
+	<section class="page-section traveller-detail-container">
 		<section>
 			<base-card
 				:class="{
@@ -164,10 +164,6 @@ export default {
 
 <style scoped lang="scss">
 .traveller-detail-container {
-	display: inline-block;
-	padding: 0 20px;
-	position: relative;
-	top: 80px;
 	.hide {
 		display: none;
 	}

@@ -1,5 +1,5 @@
 <template>
-	<section class="user-authentication-container">
+	<section class="page-section user-authentication-container">
 		<base-dialog
 			:show="!!error"
 			:is-error="!!error"
@@ -237,10 +237,6 @@ export default {
 
 <style scoped lang="scss">
 .user-authentication-container {
-	display: inline-block;
-	padding: 0 20px;
-	position: relative;
-	top: 80px;
 	.user-authentication {
 		margin: 1rem;
 		padding: 1rem;

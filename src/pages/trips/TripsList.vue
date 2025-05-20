@@ -1,5 +1,5 @@
 <template>
-	<section class="traveller-list-container">
+	<section class="page-section traveller-list-container">
 		<base-dialog
 			:show="!!error"
 			:is-error="!!error"
@@ -178,10 +178,6 @@ export default {
 
 <style scoped lang="scss">
 .traveller-list-container {
-	display: inline-block;
-	padding: 0 20px;
-	position: relative;
-	top: 80px;
 	.controls {
 		display: flex;
 		justify-content: space-between;

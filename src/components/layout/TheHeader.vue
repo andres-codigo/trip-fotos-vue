@@ -97,6 +97,8 @@
 <script>
 import { ref } from 'vue'
 
+import { PATHS } from '@/constants/paths'
+
 export default {
 	emits: ['before-update-hook-complete'],
 	data() {
@@ -192,7 +194,7 @@ export default {
 			this.toggleHamburgerMenuActiveClass()
 
 			await this.$store.dispatch('logout').then(() => {
-				this.$router.go('/')
+				this.$router.push(PATHS.AUTHENTICATION)
 			})
 		},
 		closeHamburgerMenu(event) {

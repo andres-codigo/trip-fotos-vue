@@ -1,5 +1,5 @@
 <template>
-	<section class="traveller-registration-container">
+	<section class="page-section traveller-registration-container">
 		<base-dialog
 			:show="!!error"
 			:is-error="!!error"
@@ -85,12 +85,3 @@ export default {
 	},
 }
 </script>
-
-<style scoped lang="scss">
-.traveller-registration-container {
-	display: inline-block;
-	padding: 0 20px;
-	position: relative;
-	top: 80px;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-	<section class="messages-received-container">
+	<section class="page-section messages-received-container">
 		<base-dialog
 			:show="!!error"
 			:is-error="!!error"
@@ -83,10 +83,6 @@ export default {
 
 <style scoped lang="scss">
 .messages-received-container {
-	display: inline-block;
-	padding: 0 20px;
-	position: relative;
-	top: 80px;
 	.messages-header {
 		text-align: center;
 	}
