@@ -68,9 +68,13 @@ const router = createRouter({
 			meta: { requiresUnauth: true },
 		},
 		{
-			path: '/:notFound(.*)',
+			path: PATHS.PAGENOTFOUND,
 			name: 'page-not-found',
 			component: PageNotFound,
+		},
+		{
+			path: '/:notFound(.*)',
+			redirect: PATHS.PAGENOTFOUND,
 		}, // catch all/invalid url
 	],
 })
