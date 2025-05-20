@@ -48,7 +48,7 @@ import DropZone from './DropZone.vue'
 import FilePreview from './FilePreview.vue'
 
 // File Management
-import useFileList from '@/compositions/file-list'
+import useFileList from '@/composables/file-list'
 const { files, addFiles, removeFile } = useFileList()
 
 const emit = defineEmits(['updated-files-list'])
