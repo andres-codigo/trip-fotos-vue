@@ -1,6 +1,6 @@
 {
 	"name": "trip-fotos-vue",
-	"version": "1.0.0",
+	"version": "0.10.0",
 	"private": true,
 	"description": "Extension of Udemy's Vue - The Complete Guide (incl. Router & Composition API) 'Find a coach' project.",
 	"type": "module",
