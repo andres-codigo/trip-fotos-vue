@@ -9,7 +9,6 @@ dist
 # EDITOR DIRECTORIES
 .vscode
 !.vscode/extensions.json
-.idea
 .DS_Store
 
 # NPM
@@ -26,6 +25,9 @@ dist
 
 # CYRPESS TESTING
 cypress/downloads/
+
+# DEPCHECK ANALYSIS FILES
+scripts/dependency-check/
 
 # BASH SCRIPTS
 .bash-scripts
