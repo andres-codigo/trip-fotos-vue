@@ -34,7 +34,7 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 		}
 	})
 
-	it('The top navigation container displays the Messages, All Travelers, and Logout options', () => {
+	it('The top navigation container displays the Messages, Travelers, and Logout options', () => {
 		logInUser(user.email, user.password)
 
 		// Aliases
@@ -44,8 +44,8 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 		cy.get(topNavigationSelectors.navMenuItemMessages).as(
 			'navMenuItemMessages',
 		)
-		cy.get(topNavigationSelectors.navMenuItemAllTravellers).as(
-			'navMenuItemAllTravellers',
+		cy.get(topNavigationSelectors.navMenuItemTravellers).as(
+			'navMenuItemTravellers',
 		)
 		cy.get(topNavigationSelectors.navMenuItemLogout).as('navMenuItemLogout')
 
@@ -78,16 +78,14 @@ describe('User Login and Home Page Redirection Render Tests', () => {
 				)
 			})
 
-		// Verify the All Travellers link is displayed, has the right class, and links to the trips URL
-		cy.get('@navMenuItemAllTravellers')
+		// Verify the Travellers link is displayed, has the right class, and links to the trips URL
+		cy.get('@navMenuItemTravellers')
 			.should('be.visible')
-			.and('have.class', 'nav-menu-item-all-travellers')
+			.and('have.class', 'nav-menu-item-travellers')
 			.find('a')
-			.then(($navMenuItemAllTravellers) => {
-				expect($navMenuItemAllTravellers.text()).to.equal(
-					' All Travellers ',
-				)
-				expect($navMenuItemAllTravellers).to.have.attr(
+			.then(($navMenuItemTravellers) => {
+				expect($navMenuItemTravellers.text()).to.equal(' Travellers ')
+				expect($navMenuItemTravellers).to.have.attr(
 					'href',
 					domAttributeUrls.trips,
 				)
