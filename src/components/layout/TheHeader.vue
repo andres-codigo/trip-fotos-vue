@@ -45,15 +45,15 @@
 							</router-link>
 						</li>
 						<li
-							class="nav-menu-item-all-travellers"
-							data-cy="nav-menu-item-all-travellers"
+							class="nav-menu-item-travellers"
+							data-cy="nav-menu-item-travellers"
 							@click.prevent="toggleHamburgerMenuActiveClass()"
 						>
 							<router-link
 								:to="{ name: 'trips-list' }"
 								class="nav-link"
 							>
-								All Travellers
+								Travellers
 							</router-link>
 						</li>
 					</ul>

@@ -33,7 +33,7 @@ describe('User Login and Home Page Redirection Interaction Tests', () => {
 		}
 	})
 
-	it('The top navigation displays the Title, Messages, All Travelers, and Logout options, and user is able to interact with each option', () => {
+	it('The top navigation displays the Title, Messages, Travelers, and Logout options, and user is able to interact with each option', () => {
 		logInUser(user.email, user.password)
 
 		// Aliases
@@ -43,8 +43,8 @@ describe('User Login and Home Page Redirection Interaction Tests', () => {
 		cy.get(topNavigationSelectors.navMenuItemMessages).as(
 			'navMenuItemMessages',
 		)
-		cy.get(topNavigationSelectors.navMenuItemAllTravellers).as(
-			'navMenuItemAllTravellers',
+		cy.get(topNavigationSelectors.navMenuItemTravellers).as(
+			'navMenuItemTravellers',
 		)
 		cy.get(topNavigationSelectors.navMenuItemLogout).as('navMenuItemLogout')
 
@@ -62,8 +62,8 @@ describe('User Login and Home Page Redirection Interaction Tests', () => {
 		cy.get('@navMenuItemMessages').click()
 		cy.url().should('eq', urls.messages)
 
-		// Verify clicking the All Travellers link redirects to All Travellers page
-		cy.get('@navMenuItemAllTravellers').click()
+		// Verify clicking the Travellers link redirects to Travellers page
+		cy.get('@navMenuItemTravellers').click()
 		cy.url().should('eq', urls.trips)
 
 		// Verify clicking the Logout button logs the user out and redirects to the Login page

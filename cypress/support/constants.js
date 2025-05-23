@@ -53,7 +53,7 @@ export const topNavigationSelectors = {
 	navHeaderTitleLink: '[data-cy="nav-header-title-link"]',
 	navMenuItemMessages: '[data-cy="nav-menu-item-messages"]',
 	totalMessages: '[data-cy="total-messages"]',
-	navMenuItemAllTravellers: '[data-cy="nav-menu-item-all-travellers"]',
+	navMenuItemTravellers: '[data-cy="nav-menu-item-travellers"]',
 	navMenuItemLogin: '[data-cy="nav-menu-item-login"]',
 	navMenuItemLogout: '[data-cy="nav-menu-item-logout"]',
 }
