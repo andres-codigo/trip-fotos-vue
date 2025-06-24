@@ -143,9 +143,7 @@ npm run preview
 
 2. **Enable Required Firebase Products**
    Navigate to the "Build" dropdown menu in your Firebase project and enable the following:
-
     - **Realtime Database**
-
         - Set the location to **United States (us-central1, us-east1, or us-west1)**.
         - Copy the database URL and add it to your `.env` file under `VITE_BACKEND_BASE_URL`.
         - Update the database rules as follows:
@@ -165,7 +163,6 @@ npm run preview
             ```
 
     - **Authentication**
-
         - Go to "Sign-in Method" and enable **Email/Password**. Ensure **Email link (passwordless sign-in)** is NOT enabled.
 
     - **Cloud Storage**
@@ -460,7 +457,6 @@ trip-fotos-vue/
 ## 🧯 Troubleshooting
 
 - **Issue**: `npm install` fails.
-
     - **Solution**: Ensure you have Node.js and npm installed. Check the required versions in the [Node.js](https://nodejs.org/) documentation.
 
 - **Issue**: Firebase environment variables are not working.
