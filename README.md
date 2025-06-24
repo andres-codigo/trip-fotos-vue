@@ -115,8 +115,8 @@ npm run lint:fix
 # Format files using Prettier
 npm run format
 
-# Open the Cypress Test Runner in interactive mode
-npm run cy:open
+# Open the Cypress E2E Test Runner in interactive mode
+npm run cy:open:e2e
 
 # Build the project for production
 npm run build
@@ -143,9 +143,7 @@ npm run preview
 
 2. **Enable Required Firebase Products**
    Navigate to the "Build" dropdown menu in your Firebase project and enable the following:
-
     - **Realtime Database**
-
         - Set the location to **United States (us-central1, us-east1, or us-west1)**.
         - Copy the database URL and add it to your `.env` file under `VITE_BACKEND_BASE_URL`.
         - Update the database rules as follows:
@@ -165,7 +163,6 @@ npm run preview
             ```
 
     - **Authentication**
-
         - Go to "Sign-in Method" and enable **Email/Password**. Ensure **Email link (passwordless sign-in)** is NOT enabled.
 
     - **Cloud Storage**
@@ -174,6 +171,66 @@ npm run preview
 3. **Add Firebase to Your Web App**
     - Register your app in the Firebase Console.
     - Copy the Firebase configuration values and add them to your `.env` file.
+
+### HTTPS for Local Development
+
+This project supports running the local development server over **HTTPS** for a more production-like environment.
+
+#### 1. Generate Self-Signed Certificates
+
+You need a self-signed SSL certificate and key for local HTTPS.
+Run the following command in your project root to generate them:
+
+```sh
+openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
+
+#### 2. Move Certificates to the `certs` Folder
+
+Create a `certs` directory in your project root and move the generated files:
+
+```sh
+mkdir -p certs
+mv localhost.crt certs/
+mv localhost.key certs/
+```
+
+Your project structure should now include:
+
+```
+trip-fotos-vue/
+  certs/
+    localhost.crt
+    localhost.key
+  ...
+```
+
+#### 3. Update `.gitignore`
+
+Add the `certs/` folder to your `.gitignore` to prevent committing sensitive certificate files:
+
+```
+certs/
+```
+
+#### 4. Vite HTTPS Configuration
+
+The Vite config is set up to use these certificates for HTTPS **only in local development**.
+If the `certs` folder or files are missing, Vite will fall back to HTTP (as in CI or Vercel deployments).
+
+#### 5. Start the Development Server
+
+```sh
+npm run dev
+```
+
+Visit [https://localhost:3000](https://localhost:3000) in your browser.
+You may see a browser warning about the self-signed certificate—this is expected for local development.
+
+---
 
 ### Environment Variables
 
@@ -208,6 +265,11 @@ VITE_ADMIN_ID='' # Firebase authenticated User UID for deletion of users rights
 # CYPRESS TESTING
 CYPRESS_USER_EMAIL=''
 CYPRESS_USER_PASSWORD=''
+
+# HTTPS CONFIGURATION
+HTTPS=true
+SSL_CRT_FILE=./certs/localhost.crt
+SSL_KEY_FILE=./certs/localhost.key
 
 ```
 
@@ -265,25 +327,20 @@ npm install
 
 Cypress is pre-configured in this project. Feel free to customise the [cypress.config.js](https://github.com/andres-codigo/trip-fotos-vue/blob/main/cypress.config.js) file as needed for your testing requirements.
 
-**Run Tests**
+**Run Cypress Tests**
 
-- **Interactive Mode**: Opens the Cypress Test Runner for a visual testing experience.
-
-```bash
-npx cypress open
-```
-
-- **Headless Mode:** Runs all tests in the terminal without opening the Test Runner
-
-```bash
-npx cypress run
-```
-
-- Run a specific test file:
-
-```bash
-npx cypress run --spec "cypress/e2e/<test-file>.cy.js"
-```
+- **Open Cypress E2E Test Runner (interactive mode):**
+    ```bash
+    npm run cy:open:e2e
+    ```
+- **Run Cypress E2E tests in headless mode:**
+    ```bash
+    npx cypress run
+    ```
+- **Run a specific test file:**
+    ```bash
+    npx cypress run --spec "cypress/e2e/pages/<test-file>[interaction/render].spec.cy.js"
+    ```
 
 **Cypress Directory Structure**
 
@@ -460,8 +517,13 @@ trip-fotos-vue/
 ## 🧯 Troubleshooting
 
 - **Issue**: `npm install` fails.
-
     - **Solution**: Ensure you have Node.js and npm installed. Check the required versions in the [Node.js](https://nodejs.org/) documentation.
 
 - **Issue**: Firebase environment variables are not working.
     - **Solution**: Ensure you have created a [.env](http://_vscodecontentref_/1) file in the root directory with the correct Firebase configuration values.
+
+- **Issue**: `Error: ENOENT: no such file or directory, open './certs/localhost.key'`
+    - **Solution**: Make sure you have generated the SSL certificate and key as described above. In CI and production (e.g., Vercel), the build will fall back to HTTP if the certs are missing.
+
+- **Issue**: Browser shows "Your connection is not private" on `https://localhost:3000`
+    - **Solution**: This is normal for self-signed certificates. Click "Advanced" and "Proceed" to continue.
