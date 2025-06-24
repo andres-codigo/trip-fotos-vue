@@ -61,29 +61,35 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
+					const chunkMap = [
+						{ test: /firebase\/auth/, name: 'firebase-auth' },
+						{
+							test: /firebase\/firestore/,
+							name: 'firebase-firestore',
+						},
+						{ test: /firebase\/storage/, name: 'firebase-storage' },
+						{ test: /firebase/, name: 'firebase-core' },
+						{ test: /vue-router/, name: 'vue-router' },
+						{ test: /vuex/, name: 'vuex' },
+						{ test: /vuefire/, name: 'vuefire' },
+						{ test: /vue-lazyload/, name: 'vue-lazyload' },
+						{ test: /vue-multiselect/, name: 'vue-multiselect' },
+						{ test: /moment/, name: 'moment' },
+						{ test: /@vercel\/analytics/, name: 'analytics' },
+						{
+							test: /@vercel\/speed-insights/,
+							name: 'speed-insights',
+						},
+						{
+							test: /browser-image-compression/,
+							name: 'image-compression',
+						},
+						{ test: /vue/, name: 'vue' },
+					]
 					if (id.includes('node_modules')) {
-						if (id.includes('firebase')) {
-							if (id.includes('firebase/auth'))
-								return 'firebase-auth'
-							if (id.includes('firebase/firestore'))
-								return 'firebase-firestore'
-							if (id.includes('firebase/storage'))
-								return 'firebase-storage'
-							return 'firebase-core'
+						for (const { test, name } of chunkMap) {
+							if (test.test(id)) return name
 						}
-						if (id.includes('vue')) return 'vue'
-						if (id.includes('vue-router')) return 'vue-router'
-						if (id.includes('vuex')) return 'vuex'
-						if (id.includes('vuefire')) return 'vuefire'
-						if (id.includes('vue-lazyload')) return 'vue-lazyload'
-						if (id.includes('vue-multiselect'))
-							return 'vue-multiselect'
-						if (id.includes('moment')) return 'moment'
-						if (id.includes('@vercel/analytics')) return 'analytics'
-						if (id.includes('@vercel/speed-insights'))
-							return 'speed-insights'
-						if (id.includes('browser-image-compression'))
-							return 'image-compression'
 					}
 				},
 			},
