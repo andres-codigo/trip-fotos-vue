@@ -201,7 +201,7 @@ mv localhost.key certs/
 Your project structure should now include:
 
 ```
-trip-fotos-react/
+trip-fotos-vue/
   certs/
     localhost.crt
     localhost.key

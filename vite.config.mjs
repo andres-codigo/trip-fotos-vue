@@ -10,8 +10,8 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const getHttpsConfig = () => {
-	const keyPath = './certs/localhost.key'
-	const certPath = './certs/localhost.crt'
+	const keyPath = process.env.SSL_KEY_FILE || './certs/localhost.key'
+	const certPath = process.env.SSL_CRT_FILE || './certs/localhost.crt'
 	if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
 		return {
 			key: fs.readFileSync(keyPath),
@@ -90,6 +90,11 @@ export default defineConfig({
 						for (const { test, name } of chunkMap) {
 							if (test.test(id)) return name
 						}
+						// Fallback: Use directory name as chunk name for unmatched dependencies
+						const parts = id.split('/')
+						const dirName =
+							parts[parts.lastIndexOf('node_modules') + 1]
+						return dirName ? `vendor-${dirName}` : 'vendor'
 					}
 				},
 			},
