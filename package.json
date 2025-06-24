@@ -10,7 +10,7 @@
 		"lint:fix": "eslint src --fix --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0 && prettier --write '**/*.{js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
 		"format": "prettier --write '**/*.{js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
 		"check:dependencies": "mkdir -p scripts/dependency-check && depcheck --txt > scripts/dependency-check/depcheck-output.txt",
-		"cy:open": "cypress open",
+		"cy:open:e2e": "cypress open --e2e",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
