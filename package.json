@@ -11,6 +11,7 @@
 		"format": "prettier --write '**/*.{js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
 		"check:dependencies": "mkdir -p scripts/dependency-check && depcheck --txt > scripts/dependency-check/depcheck-output.txt",
 		"cy:open:e2e": "cypress open --e2e",
+		"analyse": "vite-bundle-visualizer",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
@@ -45,6 +46,7 @@
 		"sass": "^1.89.2",
 		"sass-embedded": "^1.89.2",
 		"vite": "^6.3.5",
+		"vite-bundle-visualizer": "^1.2.1",
 		"vite-plugin-eslint2": "^5.0.3",
 		"vue-eslint-parser": "^10.1.3"
 	},
