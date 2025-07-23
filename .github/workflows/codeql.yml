@@ -1,0 +1,43 @@
+name: 'CodeQL'
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    schedule:
+        - cron: '0 3 * * 1' # Weekly scan on Monday at 3AM UTC
+
+permissions:
+    security-events: write
+
+jobs:
+    analyze:
+        name: CodeQL Analysis
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                language: ['javascript']
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build project
+              run: npm run build
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v4
+              with:
+                  config-file: .github/codeql/codeql-config.yml
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v4
