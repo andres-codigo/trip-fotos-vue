@@ -41,3 +41,18 @@ jobs:
 
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v3
+
+    default-actions:
+        name: CodeQL Analysis (Default Actions Config)
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Initialize CodeQL (Default)
+              uses: github/codeql-action/init@v3
+              with:
+                  languages: actions
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v3
