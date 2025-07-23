@@ -1,6 +1,6 @@
 name: CodeQL config – Vue + JS + GitHub Actions
 
-languages: ['javascript']
+languages: ['javascript', 'actions']
 
 paths:
     # Include application source code and workflows
