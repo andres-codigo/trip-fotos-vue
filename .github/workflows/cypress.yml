@@ -14,22 +14,21 @@ on:
             - main
     workflow_dispatch:
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
     check-dependabot:
         runs-on: ubuntu-latest
         outputs:
-            is-dependabot: ${{ steps.check.outputs.is-dependabot }}
+            is-dependabot: ${{ github.actor == 'dependabot[bot]' }}
         steps:
             - name: Check if PR is from Dependabot
-              id: check
-              run: |
-                  if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
-                    echo "is-dependabot=true" >> $GITHUB_OUTPUT
-                  else
-                    echo "is-dependabot=false" >> $GITHUB_OUTPUT
-                  fi
+              run: echo "Checking if actor is Dependabot - ${{ github.actor }}"
 
     skip-cypress:
+        name: Skip Cypress Tests (Dependabot)
         needs: check-dependabot
         if: needs.check-dependabot.outputs.is-dependabot == 'true'
         runs-on: ubuntu-latest
@@ -37,9 +36,11 @@ jobs:
             - run: echo "🟡 Skipping Cypress tests – Dependabot PRs do not have access to secrets."
 
     run-cypress:
+        name: Run Cypress Tests (Dependabot)
         needs: check-dependabot
         if: needs.check-dependabot.outputs.is-dependabot == 'false'
         runs-on: ubuntu-latest
+        timeout-minutes: 15
 
         steps:
             - name: Checkout code
@@ -49,11 +50,12 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
+                  cache: 'npm'
 
             - name: Install dependencies
               run: npm install
 
-            - name: Start app & run Cypress tests
+            - name: Start app & run Cypress Tests
               uses: cypress-io/github-action@v6
               env:
                   VITE_API_URL: ${{ secrets.VITE_API_URL }}
