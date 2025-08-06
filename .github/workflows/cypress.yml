@@ -1,4 +1,7 @@
 name: Run Cypress Tests
+permissions:
+    contents: read
+    pull-requests: write
 
 on:
     push:
@@ -55,8 +58,11 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Start app & run Cypress Tests
-              uses: cypress-io/github-action@v6
+            - name:
+                  Start app & run Cypress Tests
+                  # Use a specific commit SHA for stability
+                  # https://github.com/cypress-io/github-action/releases/tag/v6.10.2
+              uses: cypress-io/github-action@b8ba51a856ba5f4c15cf39007636d4ab04f23e3c
               env:
                   VITE_API_URL: ${{ secrets.VITE_API_URL }}
                   VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
