@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: Cypress - Run E2E Page Tests
 permissions:
     contents: read
     pull-requests: write
@@ -30,16 +30,16 @@ jobs:
             - name: Check if PR is from Dependabot
               run: echo "Checking if actor is Dependabot - ${{ github.actor }}"
 
-    skip-cypress:
-        name: Skip Cypress Tests (Dependabot)
+    skip-e2e-tests:
+        name: Skip Cypress E2E Tests (Dependabot)
         needs: check-dependabot
         if: needs.check-dependabot.outputs.is-dependabot == 'true'
         runs-on: ubuntu-latest
         steps:
             - run: echo "🟡 Skipping Cypress tests – Dependabot PRs do not have access to secrets."
 
-    run-cypress:
-        name: Run Cypress Tests (Dependabot)
+    run-e2e-tests:
+        name: Run Cypress E2E Tests
         needs: check-dependabot
         if: needs.check-dependabot.outputs.is-dependabot == 'false'
         runs-on: ubuntu-latest
@@ -56,11 +56,11 @@ jobs:
                   cache: 'npm'
 
             - name: Install dependencies
-              run: npm install
+              run: npm ci
 
             # Use a specific commit SHA for stability
             # https://github.com/cypress-io/github-action/releases/tag/v6.10.2
-            - name: Start app & run Cypress Tests
+            - name: Start app & run Cypress E2E Page Tests
               uses: cypress-io/github-action@b8ba51a856ba5f4c15cf39007636d4ab04f23e3c
               env:
                   VITE_API_URL: ${{ secrets.VITE_API_URL }}
@@ -73,3 +73,19 @@ jobs:
                   wait-on: 'http://localhost:4000'
                   wait-on-timeout: 60
                   browser: chrome
+
+            - name: Upload Cypress screenshots on failure
+              uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: cypress-screenshots
+                  path: cypress/screenshots
+                  retention-days: 7
+
+            - name: Upload Cypress videos on failure
+              uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: cypress-videos
+                  path: cypress/videos
+                  retention-days: 7

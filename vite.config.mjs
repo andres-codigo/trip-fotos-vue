@@ -76,10 +76,11 @@ export default defineConfig({
 						{ test: /vue-multiselect/, name: 'vue-multiselect' },
 						{ test: /moment/, name: 'moment' },
 						{ test: /@vercel\/analytics/, name: 'analytics' },
-						{
-							test: /@vercel\/speed-insights/,
-							name: 'speed-insights',
-						},
+						// TODO: SpeedInsights hidden; unhide when required
+						// {
+						// 	test: /@vercel\/speed-insights/,
+						// 	name: 'speed-insights',
+						// },
 						{
 							test: /browser-image-compression/,
 							name: 'image-compression',
