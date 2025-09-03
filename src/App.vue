@@ -8,7 +8,7 @@
 			<component :is="slotProps.Component" />
 		</transition>
 	</router-view>
-	<SpeedInsights />
+	<!-- <SpeedInsights /> -->
 </template>
 
 <script>
