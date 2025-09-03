@@ -40,6 +40,7 @@ export default {
 }
 </script>
 
-<script setup>
+<!-- TODO: SpeedInsights hidden; unhide when required -->
+<!-- <script setup>
 import { SpeedInsights } from '@vercel/speed-insights/vue'
-</script>
+</script> -->
