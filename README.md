@@ -1,6 +1,6 @@
 # trip-fotos-vue
 
-[![Run Cypress Tests](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress.yml/badge.svg)](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress.yml)
+[![Cypress - Run E2E Page Tests](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress-e2e.yml/badge.svg)](https://github.com/andres-codigo/trip-fotos-vue/actions/workflows/cypress-e2e.yml)
 
 ## Contents
 
