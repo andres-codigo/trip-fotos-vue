@@ -7,8 +7,8 @@
 	"scripts": {
 		"dev": "vite",
 		"lint": "eslint src --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0",
-		"lint:fix": "eslint src --fix --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0 && prettier --write '**/*.{vue,js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
-		"format": "prettier --write '**/*.{vue,js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
+		"lint:fix": "eslint src --fix --config eslint.config.mjs --report-unused-disable-directives --max-warnings 0 && prettier --write '**/*.{vue,js,config.js,config.mjs,css,scss,json,md}'",
+		"format": "prettier --write '**/*.{vue,js,config.js,config.mjs,css,scss,json,md}'",
 		"check:dependencies": "mkdir -p scripts/dependency-check && depcheck --txt > scripts/dependency-check/depcheck-output.txt",
 		"cy:open:e2e": "cypress open --e2e",
 		"cy:run:e2e": "cypress run --e2e",
