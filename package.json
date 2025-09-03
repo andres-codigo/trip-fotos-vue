@@ -11,6 +11,7 @@
 		"format": "prettier --write '**/*.{js,jsx,ts,tsx,config.js,config.mjs,css,scss,json,md}'",
 		"check:dependencies": "mkdir -p scripts/dependency-check && depcheck --txt > scripts/dependency-check/depcheck-output.txt",
 		"cy:open:e2e": "cypress open --e2e",
+		"cy:run:e2e": "cypress run --e2e",
 		"analyse": "vite-bundle-visualizer",
 		"build": "vite build",
 		"preview": "vite preview"
