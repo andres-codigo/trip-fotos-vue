@@ -43,9 +43,7 @@ export default {
 			const expirationDate = new Date().getTime() + expiresIn
 
 			let displayName = ''
-			if (mode === APIConstants.API_AUTH_SIGNUP_MODE) {
-				displayName
-			} else {
+			if (mode !== APIConstants.API_AUTH_SIGNUP_MODE) {
 				displayName = responseData.displayName
 			}
 
