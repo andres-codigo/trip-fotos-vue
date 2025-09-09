@@ -1,0 +1,81 @@
+# Feature Development
+'feature':
+    - 'src/components/**/*'
+    - 'src/pages/**/*'
+    - 'src/composables/**/*'
+    - 'src/directives/**/*'
+
+# Documentation
+'documentation':
+    - '**/*.md'
+    - '**/README*'
+
+# Dependencies
+'dependencies':
+    - 'package.json'
+    - 'package-lock.json'
+    - '.npmrc'
+    - '.nvmrc'
+
+# Testing
+'testing':
+    - 'src/**/*.test.*'
+    - 'src/**/*.spec.*'
+    - 'cypress/**/*'
+    - 'cypress.config.*'
+
+# Styling
+'styling':
+    - '**/*.css'
+    - '**/*.scss'
+    - 'src/styles/**/*'
+
+# State Management (Vuex)
+'store':
+    - 'src/store/**/*'
+
+# Configuration
+'config':
+    - 'vite.config.*'
+    - 'eslint.config.*'
+    - '.eslintrc*'
+    - 'prettier.config.*'
+    - '.prettierrc*'
+    - '.prettierignore'
+    - 'vercel.json'
+    - 'rules/**/*'
+    - 'index.html'
+
+# Constants
+'constants':
+    - 'src/constants/**/*'
+
+# Utilities
+'utilities':
+    - 'src/utils/**/*'
+
+# Firebase
+'firebase':
+    - 'src/firebase.js'
+    - '.firebaserc'
+
+# Vue Core Files
+'vue-core':
+    - 'src/App.vue'
+    - 'src/main.js'
+    - 'src/router.js'
+
+# Assets
+'assets':
+    - 'src/assets/**/*'
+    - 'public/**/*'
+    - '**/*.{png,jpg,jpeg,gif,svg,ico,woff,woff2}'
+
+# Build/Deployment
+'build/deployment':
+    - '.github/workflows/**/*'
+    - 'vercel.json'
+
+# Environment
+'environment':
+    - '.gitignore'
